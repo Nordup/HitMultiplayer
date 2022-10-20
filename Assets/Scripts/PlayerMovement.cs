@@ -15,7 +15,12 @@ public class PlayerMovement : NetworkBehaviour
     
     private void Start()
     {
-        if (!isLocalPlayer) return;
+        if (!isLocalPlayer)
+        {
+            var anotherCamera = GetComponentInChildren<Camera>();
+            if (anotherCamera) Destroy(anotherCamera.gameObject);
+            return;
+        }
         _character = GetComponent<CharacterController>();
     }
     
