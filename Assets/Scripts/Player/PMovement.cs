@@ -3,16 +3,16 @@ using UnityEngine;
 
 namespace Player
 {
-    public class Movement : NetworkBehaviour
+    public class PMovement : NetworkBehaviour
     {
-        // Constants
+        // Inspector vars
         public float moveSpeed;
         public float dashTime;
         public float dashDistance;
         
         public bool IsDashing => _dashDirection != Vector3.zero;
-        private float _dashStartTime;
         private Vector3 _dashDirection;
+        private float _dashStartTime;
         private Vector3 _moveDirection;
         
         private Rigidbody _rigidbody;
