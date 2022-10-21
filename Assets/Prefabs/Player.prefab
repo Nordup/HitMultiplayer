@@ -156,6 +156,8 @@ MonoBehaviour:
   cameraOrbit: {fileID: 6349401810022851788}
   minAngle: -40
   maxAngle: 40
+  dashTime: 0.2
+  dashDistance: 15
 --- !u!33 &3512726852306377292
 MeshFilter:
   m_ObjectHideFlags: 0

@@ -13,6 +13,13 @@ public class PlayerMovement : NetworkBehaviour
     private CharacterController _character;
     private float _camRotation;
     
+    // Dash
+    public float dashTime;
+    public float dashDistance;
+    
+    private float _dashStartTime;
+    private Vector3 _dashDirection;
+    
     private void Start()
     {
         if (!isLocalPlayer)
@@ -28,10 +35,14 @@ public class PlayerMovement : NetworkBehaviour
     {
         if (!isLocalPlayer) return;
         
-        // WASD handling
-        var direction = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-        direction = transform.rotation * direction;
-        _character.SimpleMove(moveSpeed * direction);
+        HandlePlayerRotation();
+        HandlePlayerMovement();
+        Dash();
+    }
+    
+    private void HandlePlayerRotation()
+    {
+        if (Cursor.visible) return;
         
         // Mouse handling
         var mouseX = Input.GetAxis("Mouse X") * mouseSensitivity;
@@ -40,5 +51,35 @@ public class PlayerMovement : NetworkBehaviour
         var mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity;
         _camRotation = Mathf.Clamp(_camRotation + mouseY, minAngle, maxAngle);
         cameraOrbit.localEulerAngles = new Vector3(-_camRotation, 0, 0);
+    }
+    
+    private void HandlePlayerMovement()
+    {
+        if (_dashDirection != Vector3.zero) return; // Don't move when Dashing
+        
+        // WASD handling
+        var direction = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+        direction = transform.rotation * direction;
+        _character.SimpleMove(moveSpeed * direction);
+        
+        // Dash
+        if (Input.GetMouseButtonDown(0))
+        {
+            _dashDirection = direction.normalized;
+            _dashStartTime = Time.time;
+        }
+    }
+    
+    private void Dash()
+    {
+        if (_dashDirection == Vector3.zero) return;
+        if (Time.time - _dashStartTime > dashTime)
+        {
+            _dashDirection = Vector3.zero;
+            return;
+        }
+
+        var speed = dashDistance / dashTime;
+        _character.SimpleMove(  speed * _dashDirection);
     }
 }
