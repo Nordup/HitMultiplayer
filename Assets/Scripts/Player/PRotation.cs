@@ -5,8 +5,8 @@ namespace Player
 {
     public class PRotation : NetworkBehaviour
     {
+        // Inspector vars
         public float mouseSensitivity;
-        
         [Header("Camera")]
         public Transform cameraOrbit;
         public float minAngle;

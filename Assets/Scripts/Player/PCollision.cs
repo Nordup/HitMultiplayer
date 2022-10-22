@@ -9,11 +9,13 @@ namespace Player
         // Inspector vars
         public float hitTime;
         
-        private bool _isHit;
-        
+        // Components
         private PMovement _pMovement;
         private MeshRenderer _meshRenderer;
-
+        
+        [SyncVar(hook = nameof(SetHit))]
+        private bool _isHit;
+        
         private void Start()
         {
             _pMovement = GetComponent<PMovement>();
@@ -25,28 +27,33 @@ namespace Player
             if (!isServer) return;
             if (!other.gameObject.CompareTag("Player")) return;
             
-            var otherPlayer = other.gameObject.GetComponent<PCollision>();
-            if (_pMovement.IsDashing) otherPlayer.TargetOnHit();
+            var otherPMovement = other.gameObject.GetComponent<PMovement>();
+            if (!otherPMovement.IsDashing) return;
+            
+            if (!_pMovement.IsDashing || otherPMovement.DashStartTime < _pMovement.DashStartTime) OnHit();
         }
         
-        [TargetRpc]
-        private void TargetOnHit()
+        [Server]
+        private void OnHit()
         {
             if (_isHit) return;
-            Debug.Log("Hit by enemy");
-
+            
             _isHit = true;
-            _meshRenderer.material.color = Color.red;
             UnHit();
         }
-
+        
+        [Server]
         private async void UnHit()
         {
             await Task.Delay((int)(hitTime * 1000));
-            Debug.Log("Hit timed out");
-            
             _isHit = false;
             _meshRenderer.material.color = Color.gray;
+        }
+
+        [Client]
+        private void SetHit(bool oldValue, bool newValue)
+        {
+            _meshRenderer.material.color = _isHit ? Color.red : Color.gray;
         }
     }
 }
