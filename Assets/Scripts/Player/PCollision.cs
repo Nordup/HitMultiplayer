@@ -8,6 +8,7 @@ namespace Player
     {
         // Inspector vars
         public float hitTime;
+        public HitEvents hitEvents;
         
         // Components
         private PMovement _pMovement;
@@ -30,26 +31,22 @@ namespace Player
             var otherPMovement = other.gameObject.GetComponent<PMovement>();
             if (!otherPMovement.IsDashing) return;
             
-            if (!_pMovement.IsDashing || otherPMovement.DashStartTime < _pMovement.DashStartTime) OnHit();
+            if (!_pMovement.IsDashing || otherPMovement.DashStartTime < _pMovement.DashStartTime)
+                WasHit(otherPMovement.netIdentity);
         }
         
         [Server]
-        private void OnHit()
+        private async void WasHit(NetworkIdentity byPlayer)
         {
             if (_isHit) return;
             
             _isHit = true;
-            UnHit();
-        }
-        
-        [Server]
-        private async void UnHit()
-        {
+            hitEvents.RaiseHit(byPlayer);
+            
             await Task.Delay((int)(hitTime * 1000));
             _isHit = false;
-            _meshRenderer.material.color = Color.gray;
         }
-
+        
         [Client]
         private void SetHit(bool oldValue, bool newValue)
         {

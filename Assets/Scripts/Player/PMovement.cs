@@ -19,7 +19,7 @@ namespace Player
         private Vector3 _dashDirection;
         private float _dashStartTime;
         private Vector3 _moveDirection;
-
+        
         [Client]
         private void Start()
         {
@@ -31,11 +31,11 @@ namespace Player
         private void Update()
         {
             if (!isLocalPlayer) return;
-        
+            
             // WASD handling
             _moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
             _moveDirection = transform.rotation * _moveDirection;
-        
+            
             // Dash
             if (Input.GetMouseButtonDown(0) && !IsDashing && _moveDirection != Vector3.zero)
             {
@@ -49,7 +49,7 @@ namespace Player
         private void FixedUpdate()
         {
             if (!isLocalPlayer) return;
-        
+            
             if (IsDashing)
             {
                 if (Time.time - _dashStartTime > dashTime)
@@ -74,7 +74,7 @@ namespace Player
         {
             _dashDirection = direction;
             _dashStartTime = Time.time;
-
+            
             await Task.Delay((int)(dashTime * 1000));
             _dashDirection = Vector3.zero;
         }

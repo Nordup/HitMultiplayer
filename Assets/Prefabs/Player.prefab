@@ -62,7 +62,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 06df9a3ae365f6045adee62f711efde7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -107,8 +107,9 @@ GameObject:
   m_Component:
   - component: {fileID: 3512726852306377295}
   - component: {fileID: 522780239765956598}
-  - component: {fileID: 4926461030418734210}
   - component: {fileID: -7110448192449281744}
+  - component: {fileID: -6070637595058071885}
+  - component: {fileID: 4926461030418734210}
   - component: {fileID: -5318991862364223439}
   - component: {fileID: 3512726852306377292}
   - component: {fileID: 3512726852306377293}
@@ -157,6 +158,37 @@ MonoBehaviour:
   moveSpeed: 10
   dashTime: 0.2
   dashDistance: 15
+--- !u!114 &-7110448192449281744
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3512726852306377283}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3762ee36c705138499b09d1bcc9f03d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  hitTime: 3
+  hitEvents: {fileID: 11400000, guid: 39df0c06d5699d94e8f06c64e6942a43, type: 2}
+--- !u!114 &-6070637595058071885
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3512726852306377283}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c592ddc0e30647759266a9de0d19aa4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  scoreEvents: {fileID: 11400000, guid: dc3f6274448a1d049872b129c4da34d0, type: 2}
 --- !u!114 &4926461030418734210
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -175,21 +207,6 @@ MonoBehaviour:
   cameraOrbit: {fileID: 6349401810022851788}
   minAngle: -40
   maxAngle: 40
---- !u!114 &-7110448192449281744
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3512726852306377283}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3762ee36c705138499b09d1bcc9f03d3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncMode: 0
-  syncInterval: 0.1
-  hitTime: 3
 --- !u!114 &-5318991862364223439
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -204,6 +221,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
+  gObjects:
+  - {fileID: 8082122272264612376}
 --- !u!33 &3512726852306377292
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -232,7 +251,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 06df9a3ae365f6045adee62f711efde7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -388,7 +407,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7159616495602789451
 Transform:
   m_ObjectHideFlags: 0
