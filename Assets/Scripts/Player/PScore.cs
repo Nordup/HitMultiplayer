@@ -1,4 +1,5 @@
 using Mirror;
+using TMPro;
 using UnityEngine;
 
 namespace Player
@@ -6,13 +7,22 @@ namespace Player
     public class PScore : NetworkBehaviour
     {
         public ScoreEvents scoreEvents;
+        public TextMeshPro scoreText;
         
+        [SyncVar(hook = nameof(SetScore))]
         private int _score;
         
+        [Server]
         public override void OnStartServer()
         {
             scoreEvents.RegisterPlayer(netIdentity);
             scoreEvents.UpdateScoreEvent += OnUpdateScore;
+        }
+        
+        [Server]
+        public override void OnStopServer()
+        {
+            scoreEvents.UnregisterPlayer(netIdentity);
         }
         
         [Server]
@@ -21,12 +31,12 @@ namespace Player
             if (playerId != netIdentity) return;
 
             _score = score;
-            Debug.Log($"{gameObject.name} score is {score}");
         }
         
-        public override void OnStopServer()
+        [Client]
+        private void SetScore(int oldScore, int newScore)
         {
-            scoreEvents.UnregisterPlayer(netIdentity);
+            scoreText.text = _score.ToString();
         }
     }
 }

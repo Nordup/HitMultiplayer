@@ -38,7 +38,7 @@ public class ScoreManager : NetworkBehaviour
         var newScore = score + 1;
         _playerScores[playerId] = newScore;
         scoreEvents.UpdateScore(playerId, newScore);
-
+        
         if (newScore >= winScores)
         {
             Debug.Log("Player won!");
