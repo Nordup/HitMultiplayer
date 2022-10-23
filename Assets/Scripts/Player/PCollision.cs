@@ -1,4 +1,5 @@
 using System.Threading.Tasks;
+using Events;
 using Mirror;
 using UnityEngine;
 
@@ -8,7 +9,7 @@ namespace Player
     {
         // Inspector vars
         public float hitTime;
-        public HitEvents hitEvents;
+        public PlayerHitEvents playerHitEvents;
         
         // Components
         private PMovement _pMovement;
@@ -19,6 +20,8 @@ namespace Player
         
         private void Start()
         {
+            if (!playerHitEvents) Debug.LogError("playerHitEvents is not set");
+            
             _pMovement = GetComponent<PMovement>();
             _meshRenderer = GetComponent<MeshRenderer>();
         }
@@ -41,7 +44,7 @@ namespace Player
             if (_isHit) return;
             
             _isHit = true;
-            hitEvents.RaiseHit(byPlayer);
+            playerHitEvents.PlayerHit(byPlayer);
             
             await Task.Delay((int)(hitTime * 1000));
             _isHit = false;

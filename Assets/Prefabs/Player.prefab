@@ -397,7 +397,7 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   hitTime: 3
-  hitEvents: {fileID: 11400000, guid: 39df0c06d5699d94e8f06c64e6942a43, type: 2}
+  playerHitEvents: {fileID: 11400000, guid: 39df0c06d5699d94e8f06c64e6942a43, type: 2}
 --- !u!114 &-6070637595058071885
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -558,7 +558,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   syncMode: 0
-  syncInterval: 0.1
+  syncInterval: 0.05
   clientAuthority: 1
   sendRate: 30
   bufferTimeMultiplier: 2

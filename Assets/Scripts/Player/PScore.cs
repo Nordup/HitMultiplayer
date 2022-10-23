@@ -1,3 +1,4 @@
+using Events;
 using Mirror;
 using TMPro;
 using UnityEngine;
@@ -14,6 +15,8 @@ namespace Player
         
         public override void OnStartServer()
         {
+            if (!scoreEvents) Debug.LogError("scoreEvents is not set");
+            
             scoreEvents.RegisterPlayer(netIdentity);
             scoreEvents.UpdateScoreEvent += OnUpdateScore;
         }
@@ -21,6 +24,7 @@ namespace Player
         public override void OnStopServer()
         {
             scoreEvents.UnregisterPlayer(netIdentity);
+            scoreEvents.UpdateScoreEvent -= OnUpdateScore;
         }
         
         [Server]

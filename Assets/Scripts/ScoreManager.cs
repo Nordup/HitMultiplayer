@@ -1,12 +1,13 @@
 using System.Collections.Generic;
 using System.Linq;
+using Events;
 using Mirror;
 using UnityEngine;
 
 public class ScoreManager : NetworkBehaviour
 {
     public int winScores;
-    public HitEvents hitEvents;
+    public PlayerHitEvents playerHitEvents;
     public ScoreEvents scoreEvents;
     public GameEvents gameEvents;
     
@@ -15,25 +16,26 @@ public class ScoreManager : NetworkBehaviour
     [Server]
     private void Start()
     {
-        hitEvents.HitEvent += AddScore;
+        if (!playerHitEvents) Debug.LogError("playerHitEvents is not set");
+        if (!scoreEvents) Debug.LogError("scoreEvents is not set");
+        if (!gameEvents) Debug.LogError("gameEvents is not set");
+        
+        playerHitEvents.HitEvent += AddScore;
         scoreEvents.RegisterPlayerEvent += OnRegisterPlayerEvent;
         scoreEvents.UnregisterPlayerEvent += OnUnregisterPlayerEvent;
         gameEvents.ResetScoresEvent += ResetScores;
     }
     
-    [Server]
     private void OnRegisterPlayerEvent(NetworkIdentity playerId)
     {
         _playerScores.Add(playerId, 0);
     }
     
-    [Server]
     private void OnUnregisterPlayerEvent(NetworkIdentity playerId)
     {
         _playerScores.Remove(playerId);
     }
     
-    [Server]
     private void AddScore(NetworkIdentity playerId)
     {
         if (!_playerScores.TryGetValue(playerId, out var score)) return;
@@ -44,8 +46,7 @@ public class ScoreManager : NetworkBehaviour
         
         if (newScore >= winScores) gameEvents.PlayerWon(playerId);
     }
-
-    [Server]
+    
     private void ResetScores()
     {
         foreach (var playerId in _playerScores.Keys.ToList())
@@ -53,5 +54,13 @@ public class ScoreManager : NetworkBehaviour
             _playerScores[playerId] = 0;
             scoreEvents.UpdateScore(playerId, 0);
         }
+    }
+    
+    private void OnDestroy()
+    {
+        playerHitEvents.HitEvent -= AddScore;
+        scoreEvents.RegisterPlayerEvent -= OnRegisterPlayerEvent;
+        scoreEvents.UnregisterPlayerEvent -= OnUnregisterPlayerEvent;
+        gameEvents.ResetScoresEvent -= ResetScores;
     }
 }

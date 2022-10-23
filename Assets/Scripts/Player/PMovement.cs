@@ -75,7 +75,7 @@ namespace Player
             _dashDirection = direction;
             _dashStartTime = Time.time;
             
-            await Task.Delay((int)(dashTime * 1000));
+             await Task.Delay((int)(dashTime * 1000));
             _dashDirection = Vector3.zero;
         }
     }
