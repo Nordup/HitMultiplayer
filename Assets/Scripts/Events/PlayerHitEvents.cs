@@ -8,7 +8,7 @@ namespace Events
     public class PlayerHitEvents : ScriptableObject
     {
         public event Action<NetworkIdentity> HitEvent;
-    
+        
         public void PlayerHit(NetworkIdentity netId)
         {
             HitEvent?.Invoke(netId);
