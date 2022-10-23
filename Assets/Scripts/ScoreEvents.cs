@@ -1,7 +1,7 @@
 using Mirror;
 using UnityEngine;
 
-[CreateAssetMenu]
+[CreateAssetMenu(menuName = "HitScriptableObjects/ScoreEvents", fileName = "ScoreEvents")]
 public class ScoreEvents : ScriptableObject
 {
     public delegate void RegisterEvent(NetworkIdentity playerId);
@@ -20,7 +20,7 @@ public class ScoreEvents : ScriptableObject
     {
         UnregisterPlayerEvent?.Invoke(playerId);
     }
-
+    
     public void UpdateScore(NetworkIdentity playerId, int score)
     {
         UpdateScoreEvent?.Invoke(playerId, score);

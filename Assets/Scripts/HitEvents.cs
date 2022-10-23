@@ -1,7 +1,7 @@
 using Mirror;
 using UnityEngine;
 
-[CreateAssetMenu]
+[CreateAssetMenu(menuName = "HitScriptableObjects/HitEvents", fileName = "HitEvents")]
 public class HitEvents : ScriptableObject
 {
     public delegate void Hit(NetworkIdentity netId);

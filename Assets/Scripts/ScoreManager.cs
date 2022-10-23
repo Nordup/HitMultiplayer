@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using Mirror;
 using UnityEngine;
 
@@ -7,15 +8,17 @@ public class ScoreManager : NetworkBehaviour
     public int winScores;
     public HitEvents hitEvents;
     public ScoreEvents scoreEvents;
+    public GameEvents gameEvents;
     
-    private Dictionary<NetworkIdentity, int> _playerScores = new ();
+    private readonly Dictionary<NetworkIdentity, int> _playerScores = new ();
     
     [Server]
     private void Start()
     {
+        hitEvents.HitEvent += AddScore;
         scoreEvents.RegisterPlayerEvent += OnRegisterPlayerEvent;
         scoreEvents.UnregisterPlayerEvent += OnUnregisterPlayerEvent;
-        hitEvents.HitEvent += AddScore;
+        gameEvents.ResetScoresEvent += ResetScores;
     }
     
     [Server]
@@ -39,9 +42,16 @@ public class ScoreManager : NetworkBehaviour
         _playerScores[playerId] = newScore;
         scoreEvents.UpdateScore(playerId, newScore);
         
-        if (newScore >= winScores)
+        if (newScore >= winScores) gameEvents.PlayerWon(playerId);
+    }
+
+    [Server]
+    private void ResetScores()
+    {
+        foreach (var playerId in _playerScores.Keys.ToList())
         {
-            Debug.Log("Player won!");
+            _playerScores[playerId] = 0;
+            scoreEvents.UpdateScore(playerId, 0);
         }
     }
 }

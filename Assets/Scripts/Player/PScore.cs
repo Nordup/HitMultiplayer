@@ -12,14 +12,12 @@ namespace Player
         [SyncVar(hook = nameof(SetScore))]
         private int _score;
         
-        [Server]
         public override void OnStartServer()
         {
             scoreEvents.RegisterPlayer(netIdentity);
             scoreEvents.UpdateScoreEvent += OnUpdateScore;
         }
         
-        [Server]
         public override void OnStopServer()
         {
             scoreEvents.UnregisterPlayer(netIdentity);
