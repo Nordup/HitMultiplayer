@@ -17,7 +17,7 @@ namespace Player
         private void Start()
         {
             if (!isLocalPlayer) return;
-            if (!menuEvents) Debug.LogError("roomEvents is not set");
+            if (!menuEvents) Debug.LogError("menuEvents is not set");
             CmdSetName(menuEvents.PlayerName); // Shouldn't be changed during game
         }
         

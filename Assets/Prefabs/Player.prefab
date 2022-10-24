@@ -501,6 +501,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3512726852306377295}
+  - component: {fileID: -1617714694461373620}
   - component: {fileID: 522780239765956598}
   - component: {fileID: -7110448192449281744}
   - component: {fileID: -6070637595058071885}
@@ -539,6 +540,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-1617714694461373620
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3512726852306377283}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e87ecff536e74d02aac447429cb76dc9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  gameEvents: {fileID: 11400000, guid: 53a6000b0c0408f46aa44be8a5bc1330, type: 2}
+  menuEvents: {fileID: 11400000, guid: f3f8e580e3dac3247a2eea894072e673, type: 2}
 --- !u!114 &522780239765956598
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -571,7 +588,7 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   hitTime: 3
-  playerHitEvents: {fileID: 11400000, guid: 39df0c06d5699d94e8f06c64e6942a43, type: 2}
+  gameEvents: {fileID: 11400000, guid: 53a6000b0c0408f46aa44be8a5bc1330, type: 2}
 --- !u!114 &-6070637595058071885
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -586,7 +603,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.5
-  scoreEvents: {fileID: 11400000, guid: dc3f6274448a1d049872b129c4da34d0, type: 2}
+  gameEvents: {fileID: 11400000, guid: 53a6000b0c0408f46aa44be8a5bc1330, type: 2}
   scoreText: {fileID: 4473009640983222827}
 --- !u!114 &6229533456760150911
 MonoBehaviour:

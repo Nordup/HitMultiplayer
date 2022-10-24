@@ -9,7 +9,7 @@ namespace Player
     {
         // Inspector vars
         public float hitTime;
-        public PlayerHitEvents playerHitEvents;
+        public GameEvents gameEvents;
         
         // Components
         private PMovement _pMovement;
@@ -20,7 +20,7 @@ namespace Player
         
         private void Start()
         {
-            if (!playerHitEvents) Debug.LogError("playerHitEvents is not set");
+            if (!gameEvents) Debug.LogError("gameEvents is not set");
             
             _pMovement = GetComponent<PMovement>();
             _meshRenderer = GetComponent<MeshRenderer>();
@@ -45,7 +45,7 @@ namespace Player
             if (_isHit) return;
             
             _isHit = true;
-            playerHitEvents.PlayerHit(byPlayer);
+            gameEvents.PlayerHit(byPlayer);
             
             await Task.Delay((int)(hitTime * 1000));
             _isHit = false;

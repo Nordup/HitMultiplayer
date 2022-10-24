@@ -7,7 +7,7 @@ namespace Player
 {
     public class PScore : NetworkBehaviour
     {
-        public ScoreEvents scoreEvents;
+        public GameEvents gameEvents;
         public TextMeshPro scoreText;
         
         [SyncVar(hook = nameof(SetScore))]
@@ -15,16 +15,13 @@ namespace Player
         
         public override void OnStartServer()
         {
-            if (!scoreEvents) Debug.LogError("scoreEvents is not set");
-            
-            scoreEvents.RegisterPlayer(netIdentity);
-            scoreEvents.UpdateScoreEvent += OnUpdateScore;
+            if (!gameEvents) Debug.LogError("gameEvents is not set");
+            gameEvents.UpdatePlayerScoreEvent += OnUpdateScore;
         }
         
         public override void OnStopServer()
         {
-            scoreEvents.UnregisterPlayer(netIdentity);
-            scoreEvents.UpdateScoreEvent -= OnUpdateScore;
+            gameEvents.UpdatePlayerScoreEvent -= OnUpdateScore;
         }
         
         [Server]
