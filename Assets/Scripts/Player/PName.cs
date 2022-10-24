@@ -18,10 +18,9 @@ namespace Player
         {
             if (!isLocalPlayer) return;
             if (!menuEvents) Debug.LogError("roomEvents is not set");
-            _playerName = menuEvents.PlayerName; // Shouldn't be changed during game
-            nameText.text = _playerName;
+            CmdSetName(menuEvents.PlayerName); // Shouldn't be changed during game
         }
-
+        
         [Command] // Sends to server
         private void CmdSetName(string playerName)
         {
