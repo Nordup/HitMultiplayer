@@ -8,7 +8,7 @@ namespace Player
     public class PName : NetworkBehaviour
     {
         public MenuEvents menuEvents;
-        public TextMeshPro nameText;
+        public TextMeshProUGUI nameText;
         
         [SyncVar(hook = nameof(SetName))]
         private string _playerName;

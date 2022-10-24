@@ -8,7 +8,7 @@ namespace Player
     public class PScore : NetworkBehaviour
     {
         public GameEvents gameEvents;
-        public TextMeshPro scoreText;
+        public TextMeshProUGUI scoreText;
         
         [SyncVar(hook = nameof(SetScore))]
         private int _score;

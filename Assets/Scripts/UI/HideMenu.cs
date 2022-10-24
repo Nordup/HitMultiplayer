@@ -1,36 +1,39 @@
 using Events;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace UI
 {
     public class HideMenu : MonoBehaviour
     {
         public NetworkEvents networkEvents;
-        [FormerlySerializedAs("hudPanel")] public GameObject menuPanel;
+        public GameObject menuPanel;
+        public GameObject inGameUI;
         
         private void Start()
         {
             if (!networkEvents) Debug.LogError("networkEvents is not set");
             
-            networkEvents.ClientConnectEvent += HideHud;
-            networkEvents.ClientDisconnectEvent += ShowHud;
+            networkEvents.ClientConnectEvent += EnterGame;
+            networkEvents.ClientDisconnectEvent += LeaveGame;
+            LeaveGame();
         }
         
-        private void HideHud()
+        private void EnterGame()
         {
+            inGameUI.SetActive(true);
             menuPanel.SetActive(false);
         }
         
-        private void ShowHud()
+        private void LeaveGame()
         {
+            inGameUI.SetActive(false);
             menuPanel.SetActive(true);
         }
         
         private void OnDestroy()
         {
-            networkEvents.ClientConnectEvent -= HideHud;
-            networkEvents.ClientDisconnectEvent -= ShowHud;
+            networkEvents.ClientConnectEvent -= EnterGame;
+            networkEvents.ClientDisconnectEvent -= LeaveGame;
         }
     }
 }
