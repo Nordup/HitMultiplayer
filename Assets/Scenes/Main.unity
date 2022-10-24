@@ -802,6 +802,7 @@ MonoBehaviour:
   playersManager: {fileID: 470774214}
   scoreManager: {fileID: 577246964}
   winnerMenu: {fileID: 324762331}
+  cursorHide: {fileID: 1807420765}
 --- !u!114 &206387619
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2303,8 +2304,8 @@ MonoBehaviour:
   m_FillRect: {fileID: 1238602432}
   m_HandleRect: {fileID: 100557493}
   m_Direction: 0
-  m_MinValue: 1
-  m_MaxValue: 30
+  m_MinValue: 2
+  m_MaxValue: 20
   m_WholeNumbers: 1
   m_Value: 10
   m_OnValueChanged:
@@ -7754,7 +7755,7 @@ MonoBehaviour:
   onlineScene: 
   transport: {fileID: 1974131498}
   networkAddress: localhost
-  maxConnections: 25
+  maxConnections: 20
   authenticator: {fileID: 0}
   playerPrefab: {fileID: 3512726852306377283, guid: 090c9ec2069993a4993d3d8dadeae840,
     type: 3}

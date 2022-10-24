@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace UI
 {
-    public class ToCanvas : MonoBehaviour
+    public class PlayerStatsToCanvas : MonoBehaviour
     {
         public Transform lookAt;
         public float scaleMult;
@@ -24,24 +24,28 @@ namespace UI
         
         void Update()
         {
-            var newPos = _mainCamera.WorldToScreenPoint(lookAt.position);
-            _transform.position = new Vector3(newPos.x, newPos.y, newPos.z);
+            _transform.position = _mainCamera.WorldToScreenPoint(lookAt.position);
             
+            // Make smaller if far away
             var distance = (lookAt.position - _mainCamera.gameObject.transform.position).magnitude;
             _transform.localScale = Vector3.one / (distance * scaleMult);
             
+            // Don't make smaller than minHeight
             var actualSize = _transform.localScale.y * _transform.sizeDelta.y;
             if (actualSize < minHeight)
             {
-                _minScale = minHeight / _transform.sizeDelta.y;
+                // Uncomment when changing realtime
+                // _minScale = minHeight / _transform.sizeDelta.y;
                 _transform.localScale = _minScale * Vector3.one;
             }
-
+            
+            // Make on top of lookAt.position
             actualSize = _transform.localScale.y * _transform.sizeDelta.y;
             var pos = _transform.position;
             _transform.position = new Vector3(pos.x, pos.y + actualSize / 2, pos.z);
             
-            _canvasGroup.alpha = newPos.z < 0 ? 0 : 1;
+            // Hide if besides camera
+            _canvasGroup.alpha = _transform.position.z < 0 ? 0 : 1;
         }
     }
 }

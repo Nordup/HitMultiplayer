@@ -15,7 +15,6 @@ public class RespawnPlayers : NetworkBehaviour
         gameEvents.RestartMatchEvent += Respawn;
     }
     
-    [Server]
     private void UnSpawn(NetworkIdentity obj)
     {
         foreach (var conn in NetworkServer.connections.Values.ToArray())
@@ -24,8 +23,7 @@ public class RespawnPlayers : NetworkBehaviour
             Destroy(oldPrefab);
         }
     }
-
-    [Server]
+    
     private void Respawn()
     {
         foreach (var conn in NetworkServer.connections.Values.ToArray())

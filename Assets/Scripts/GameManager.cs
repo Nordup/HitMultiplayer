@@ -10,7 +10,10 @@ public class GameManager : NetworkBehaviour
     public GameEvents gameEvents;
     public PlayersManager playersManager;
     public ScoreManager scoreManager;
+    
+    // UI calls on clients
     public WinnerMenu winnerMenu;
+    public CursorHide cursorHide;
     
     private void Start()
     {
@@ -29,6 +32,7 @@ public class GameManager : NetworkBehaviour
         
         await Task.Delay((int)(matchRestartTime * 1000));
         
+        if (!isServer) return;
         RpcHideWinnerMenu();
         gameEvents.RestartMatch();
     }
@@ -37,12 +41,14 @@ public class GameManager : NetworkBehaviour
     private void RpcShowWinnerMenu(NetworkIdentity playerId, string playerName, int score)
     {
         winnerMenu.ShowMenu(playerName, score);
+        cursorHide.ShowCursor();
     }
     
     [ClientRpc]
     private void RpcHideWinnerMenu()
     {
         winnerMenu.HideMenu();
+        cursorHide.HideCursor();
     }
     
     private void OnDestroy()
