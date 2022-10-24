@@ -9,11 +9,11 @@ namespace UI
     {
         public Slider slider;
         public TMP_Text countText;
-        public RoomEvents roomEvents;
+        public MenuEvents menuEvents;
         
         private void Start()
         {
-            if (!roomEvents) Debug.LogError("roomEvents is not set");
+            if (!menuEvents) Debug.LogError("roomEvents is not set");
             slider.onValueChanged.AddListener(UpdateCount);
             UpdateCount(slider.value);
         }
@@ -22,7 +22,7 @@ namespace UI
         {
             var maxPlayers = (int)count;
             countText.text = maxPlayers.ToString();
-            roomEvents.MaxPlayersChanged(maxPlayers);
+            menuEvents.MaxPlayersChanged(maxPlayers);
         }
         
         private void OnDestroy()

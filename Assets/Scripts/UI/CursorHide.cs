@@ -23,7 +23,6 @@ namespace UI
         
         private void HideCursor()
         {
-            Debug.Log("HideCursor");
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
         }

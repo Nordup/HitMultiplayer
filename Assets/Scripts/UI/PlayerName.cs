@@ -1,17 +1,18 @@
 using Events;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace UI
 {
     public class PlayerName : MonoBehaviour
     {
         public TMP_InputField playerNameIField;
-        public RoomEvents roomEvents;
+        public MenuEvents menuEvents;
         
         private void Start()
         {
-            if (!roomEvents) Debug.LogError("roomEvents is not set");
+            if (!menuEvents) Debug.LogError("roomEvents is not set");
             playerNameIField.onValueChanged.AddListener(CheckName);
             CheckName(playerNameIField.text);
         }
@@ -19,7 +20,7 @@ namespace UI
         private void CheckName(string playerName)
         {
             // TODO: check name
-            roomEvents.PlayerNameChanged(playerName);
+            menuEvents.PlayerNameChanged(playerName);
         }
         
         private void OnDestroy()

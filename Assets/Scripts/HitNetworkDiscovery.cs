@@ -27,7 +27,7 @@ public class DiscoveryResponse : NetworkMessage
 public class HitNetworkDiscovery : NetworkDiscoveryBase<DiscoveryRequest, DiscoveryResponse>
 {
     public Transport transport;
-    public RoomEvents roomEvents;
+    public MenuEvents menuEvents;
     
     public event Action<DiscoveryResponse> ServerFoundEvent;
     
@@ -38,16 +38,18 @@ public class HitNetworkDiscovery : NetworkDiscoveryBase<DiscoveryRequest, Discov
     private string _roomName;
     private int _maxPlayers;
 
-    private void Awake()
-    {
-        if (!roomEvents) Debug.LogError("roomEvents is not set");
-        roomEvents.PlayerNameChangedEvent += playerName => { _playerName = playerName; };
-        roomEvents.RoomNameChangedEvent += roomName => { _roomName = roomName; };
-        roomEvents.MaxPlayersChangedEvent += count => { _maxPlayers = count; };
-    }
-
     public override void Start()
     {
+        if (!menuEvents) Debug.LogError("roomEvents is not set");
+        
+        _playerName = menuEvents.PlayerName;
+        _roomName = menuEvents.RoomName;
+        _maxPlayers = menuEvents.MaxPlayers;
+        
+        menuEvents.PlayerNameChangedEvent += playerName => { _playerName = playerName; };
+        menuEvents.RoomNameChangedEvent += roomName => { _roomName = roomName; };
+        menuEvents.MaxPlayersChangedEvent += count => { _maxPlayers = count; };
+        
         if (transport == null) transport = Transport.activeTransport;
         _serverId = RandomLong();
         

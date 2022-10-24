@@ -1,6 +1,7 @@
 using Events;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace UI
@@ -9,18 +10,18 @@ namespace UI
     {
         public Button createBtn;
         public TMP_InputField roomNameIField;
-        public RoomEvents roomEvents;
+        public MenuEvents menuEvents;
         
         private void Start()
         {
-            if (!roomEvents) Debug.LogError("roomEvents is not set");
+            if (!menuEvents) Debug.LogError("roomEvents is not set");
             roomNameIField.onValueChanged.AddListener(CheckName);
             CheckName(roomNameIField.text);
         }
         
         private void CheckName(string roomName)
         {
-            roomEvents.RoomNameChanged(roomName);
+            menuEvents.RoomNameChanged(roomName);
             
             if (string.IsNullOrEmpty(roomName))
                 createBtn.interactable = false;

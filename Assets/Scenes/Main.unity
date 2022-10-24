@@ -781,7 +781,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1593849930}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &206387618
 MonoBehaviour:
@@ -2445,7 +2445,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1593849930}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &638846731
 GameObject:
@@ -3556,7 +3556,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   createBtn: {fileID: 207225844}
   roomNameIField: {fileID: 270066878}
-  roomEvents: {fileID: 11400000, guid: f3f8e580e3dac3247a2eea894072e673, type: 2}
+  menuEvents: {fileID: 11400000, guid: f3f8e580e3dac3247a2eea894072e673, type: 2}
 --- !u!1 &1127343911
 GameObject:
   m_ObjectHideFlags: 0
@@ -3691,7 +3691,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   slider: {fileID: 383856407}
   countText: {fileID: 1221094035}
-  roomEvents: {fileID: 11400000, guid: f3f8e580e3dac3247a2eea894072e673, type: 2}
+  menuEvents: {fileID: 11400000, guid: f3f8e580e3dac3247a2eea894072e673, type: 2}
 --- !u!1 &1204779521
 GameObject:
   m_ObjectHideFlags: 0
@@ -4642,7 +4642,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerNameIField: {fileID: 255691129}
-  roomEvents: {fileID: 11400000, guid: f3f8e580e3dac3247a2eea894072e673, type: 2}
+  menuEvents: {fileID: 11400000, guid: f3f8e580e3dac3247a2eea894072e673, type: 2}
 --- !u!1 &1354390413
 GameObject:
   m_ObjectHideFlags: 0
@@ -4800,51 +4800,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1372704944}
   m_CullTransparentMesh: 1
---- !u!1 &1395628708
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1395628710}
-  - component: {fileID: 1395628709}
-  m_Layer: 0
-  m_Name: CursorHide
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1395628709
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1395628708}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ec5cb20876614a7ba54b110910476661, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  networkEvents: {fileID: 11400000, guid: 2dc0e3d3e09869e43b23f2e4779ff022, type: 2}
---- !u!4 &1395628710
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1395628708}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -39.901123, y: 0.8467369, z: 38.289463}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1593849930}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1438977076
 GameObject:
   m_ObjectHideFlags: 0
@@ -5658,7 +5613,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1395628710}
   - {fileID: 1974131500}
   - {fileID: 577246966}
   - {fileID: 206387617}
@@ -5987,6 +5941,7 @@ GameObject:
   - component: {fileID: 1807420762}
   - component: {fileID: 1807420764}
   - component: {fileID: 1807420763}
+  - component: {fileID: 1807420765}
   m_Layer: 0
   m_Name: CreateJoinRoom
   m_TagString: Untagged
@@ -6045,6 +6000,19 @@ MonoBehaviour:
   maxPlayers: {fileID: 383856407}
   joinBtn: {fileID: 1280382245}
   availableRooms: {fileID: 903281897}
+--- !u!114 &1807420765
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1807420761}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec5cb20876614a7ba54b110910476661, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  networkEvents: {fileID: 11400000, guid: 2dc0e3d3e09869e43b23f2e4779ff022, type: 2}
 --- !u!1 &1807615813
 GameObject:
   m_ObjectHideFlags: 0
@@ -6317,7 +6285,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1593849930}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1974131502
 MonoBehaviour:
@@ -6364,7 +6332,7 @@ MonoBehaviour:
   enableActiveDiscovery: 1
   ActiveDiscoveryInterval: 6
   transport: {fileID: 1974131498}
-  roomEvents: {fileID: 11400000, guid: f3f8e580e3dac3247a2eea894072e673, type: 2}
+  menuEvents: {fileID: 11400000, guid: f3f8e580e3dac3247a2eea894072e673, type: 2}
 --- !u!1 &1990314220
 GameObject:
   m_ObjectHideFlags: 0
