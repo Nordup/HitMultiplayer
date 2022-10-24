@@ -21,6 +21,11 @@ public class ScoreManager : NetworkBehaviour
         gameEvents.PlayerHitEvent += AddScore;
         gameEvents.RestartMatchEvent += ClearScores;
     }
+
+    public int GetPlayerScore(NetworkIdentity playerId)
+    {
+        return _playerScores.TryGetValue(playerId, out var score) ? score : -1;
+    }
     
     private void RegisterPlayer(NetworkIdentity playerId, string playerName)
     {

@@ -24,10 +24,31 @@ namespace Player
             gameEvents.PlayerJoined(netIdentity, playerName);
         }
         
+        public override void OnStartServer()
+        {
+            gameEvents.PlayerWonEvent += playerId => StopMovement();
+            gameEvents.RestartMatchEvent += StartMovement;
+        }
+        
+        [TargetRpc]
+        private void StopMovement()
+        {
+            GetComponent<PMovement>().enabled = false;
+            GetComponent<PRotation>().enabled = false;
+        }
+
+        [TargetRpc]
+        private void StartMovement()
+        {
+            GetComponent<PMovement>().enabled = true;
+            GetComponent<PRotation>().enabled = true;
+        }
+        
         private void OnDestroy()
         {
             if (!isServer) return;
             gameEvents.PlayerLeft(netIdentity);
+            gameEvents.RestartMatchEvent -= StartMovement;
         }
     }
 }

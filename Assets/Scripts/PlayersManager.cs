@@ -7,7 +7,7 @@ public class PlayersManager : NetworkBehaviour
 {
     public GameEvents gameEvents;
     
-    private Dictionary<NetworkIdentity, string> _players = new();
+    private readonly Dictionary<NetworkIdentity, string> _players = new();
     
     private void Start()
     {
@@ -15,6 +15,11 @@ public class PlayersManager : NetworkBehaviour
         
         gameEvents.PlayerJoinedEvent += OnPlayerJoined;
         gameEvents.PlayerLeftEvent += OnPlayerLeft;
+    }
+
+    public string GetPlayerName(NetworkIdentity playerId)
+    {
+        return _players.TryGetValue(playerId, out var playerName) ? playerName : "";
     }
     
     private void OnPlayerJoined(NetworkIdentity playerId, string playerName)
