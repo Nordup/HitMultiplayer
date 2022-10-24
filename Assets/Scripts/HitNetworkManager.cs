@@ -47,6 +47,7 @@ public class HitNetworkManager : NetworkManager
     
     public override void OnClientDisconnect()
     {
+        NetworkClient.Shutdown();
         networkEvents.ClientDisconnect();
     }
 }
