@@ -32,7 +32,7 @@ public class ReplaceCamera : NetworkBehaviour
         _mainCamTransform.SetParent(newParent);
         _mainCamTransform.SetPositionAndRotation(newTransform.position, newTransform.rotation);
     }
-
+    
     public void OnDestroy()
     {
         if (!isLocalPlayer) return;

@@ -16,7 +16,7 @@ public class PlayersManager : NetworkBehaviour
         gameEvents.PlayerJoinedEvent += OnPlayerJoined;
         gameEvents.PlayerLeftEvent += OnPlayerLeft;
     }
-
+    
     public string GetPlayerName(NetworkIdentity playerId)
     {
         return _players.TryGetValue(playerId, out var playerName) ? playerName : "";
@@ -24,7 +24,6 @@ public class PlayersManager : NetworkBehaviour
     
     private void OnPlayerJoined(NetworkIdentity playerId, string playerName)
     {
-        Debug.Log($"OnPlayerJoined {playerId}. Name {playerName}");
         _players.Add(playerId, playerName);
     }
     
@@ -36,7 +35,6 @@ public class PlayersManager : NetworkBehaviour
             return;
         }
         
-        Debug.Log($"OnPlayerLeft {playerId}. Name {_players[playerId]}");
         _players.Remove(playerId);
     }
     

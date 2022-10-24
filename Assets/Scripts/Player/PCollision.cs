@@ -54,6 +54,7 @@ namespace Player
         [Client]
         private void SetHit(bool oldValue, bool newValue)
         {
+            if (!_meshRenderer) return;
             _meshRenderer.material.color = _isHit ? Color.red : Color.gray;
         }
     }
