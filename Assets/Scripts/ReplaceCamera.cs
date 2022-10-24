@@ -12,8 +12,9 @@ public class ReplaceCamera : NetworkBehaviour
     private Vector3 _savedPosition;
     private Quaternion _savedRotation;
     
-    public override void OnStartLocalPlayer()
+    public void Start()
     {
+        if (!isLocalPlayer) return;
         if (Camera.main == null)
         {
             Debug.LogError("Cannot replace camera. Camera.main is null");
@@ -32,8 +33,9 @@ public class ReplaceCamera : NetworkBehaviour
         _mainCamTransform.SetPositionAndRotation(newTransform.position, newTransform.rotation);
     }
 
-    public override void OnStopLocalPlayer()
+    public void OnDestroy()
     {
+        if (!isLocalPlayer) return;
         // Return to previous
         _mainCamTransform.SetParent(_savedParent);
         _mainCamTransform.SetPositionAndRotation(_savedPosition, _savedRotation);

@@ -26,19 +26,19 @@ namespace Player
         
         public override void OnStartServer()
         {
-            gameEvents.PlayerWonEvent += playerId => StopMovement();
-            gameEvents.RestartMatchEvent += StartMovement;
+            gameEvents.PlayerWonEvent += playerId => TargetStopMovement();
+            gameEvents.RestartMatchEvent += TargetStartMovement;
         }
         
         [TargetRpc]
-        private void StopMovement()
+        private void TargetStopMovement()
         {
             GetComponent<PMovement>().enabled = false;
             GetComponent<PRotation>().enabled = false;
         }
 
         [TargetRpc]
-        private void StartMovement()
+        private void TargetStartMovement()
         {
             GetComponent<PMovement>().enabled = true;
             GetComponent<PRotation>().enabled = true;
@@ -48,7 +48,7 @@ namespace Player
         {
             if (!isServer) return;
             gameEvents.PlayerLeft(netIdentity);
-            gameEvents.RestartMatchEvent -= StartMovement;
+            gameEvents.RestartMatchEvent -= TargetStartMovement;
         }
     }
 }

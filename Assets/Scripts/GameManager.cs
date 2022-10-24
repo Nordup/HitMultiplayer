@@ -15,37 +15,39 @@ public class GameManager : NetworkBehaviour
     private void Start()
     {
         if (!gameEvents) Debug.LogError("gameEvents is not set");
+        if (!isServer) return;
         gameEvents.PlayerWonEvent += OnPlayerWon;
     }
     
     [Server]
     private async void OnPlayerWon(NetworkIdentity playerId)
     {
-        ShowWinnerMenu(
+        RpcShowWinnerMenu(
             playerId,
             playersManager.GetPlayerName(playerId),
             scoreManager.GetPlayerScore(playerId));
         
         await Task.Delay((int)(matchRestartTime * 1000));
-
-        HideWinnerMenu();
+        
+        RpcHideWinnerMenu();
         gameEvents.RestartMatch();
     }
     
     [ClientRpc]
-    private void ShowWinnerMenu(NetworkIdentity playerId, string playerName, int score)
+    private void RpcShowWinnerMenu(NetworkIdentity playerId, string playerName, int score)
     {
         winnerMenu.ShowMenu(playerName, score);
     }
     
     [ClientRpc]
-    private void HideWinnerMenu()
+    private void RpcHideWinnerMenu()
     {
         winnerMenu.HideMenu();
     }
     
     private void OnDestroy()
     {
+        if (!isServer) return;
         gameEvents.PlayerWonEvent -= OnPlayerWon;
     }
 }
