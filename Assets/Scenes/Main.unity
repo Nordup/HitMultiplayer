@@ -6365,7 +6365,6 @@ MonoBehaviour:
   playerSpawnMethod: 0
   spawnPrefabs: []
   networkEvents: {fileID: 11400000, guid: 2dc0e3d3e09869e43b23f2e4779ff022, type: 2}
-  roomEvents: {fileID: 11400000, guid: f3f8e580e3dac3247a2eea894072e673, type: 2}
 --- !u!114 &1974131503
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6381,7 +6380,7 @@ MonoBehaviour:
   secretHandshake: -8418048593501627658
   serverBroadcastListenPort: 47777
   enableActiveDiscovery: 1
-  ActiveDiscoveryInterval: 3
+  ActiveDiscoveryInterval: 6
   transport: {fileID: 1974131498}
   roomEvents: {fileID: 11400000, guid: f3f8e580e3dac3247a2eea894072e673, type: 2}
 --- !u!1 &1990314220

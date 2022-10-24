@@ -55,8 +55,19 @@ namespace UI
         {
             if (_discoveredServers.TryGetValue(dResponse.serverId, out var roomInfo))
             {
-                // roomInfo.Info = dResponse;
-                roomInfo.OptionData.text = $"{dResponse.roomName} {roomInfo.DResponse.totalPlayers++}/{dResponse.maxPlayers}";
+                roomInfo.DResponse = dResponse;
+                var newText = $"{dResponse.roomName} {roomInfo.DResponse.totalPlayers}/{dResponse.maxPlayers}";
+                
+                if (roomInfo.OptionData.text == newText) return;
+                
+                roomInfo.OptionData.text = newText;
+                if (roomsDropdown.IsExpanded)
+                {
+                    roomsDropdown.enabled = false;
+                    roomsDropdown.enabled = true;
+                    roomsDropdown.Show();
+                }
+                
                 roomsDropdown.RefreshShownValue();
                 return;
             }
@@ -72,10 +83,15 @@ namespace UI
             };
             roomsDropdown.options.Add(optionData);
             roomsDropdown.RefreshShownValue();
-
+            
             if (roomsDropdown.options.Count == 1) OnDropdownValueChanged(0);
         }
-
+        
+        private void OnEnable()
+        {
+            SearchForRooms();
+        }
+        
         private void OnDestroy()
         {
             networkDiscovery.ServerFoundEvent -= OnServerFound;
