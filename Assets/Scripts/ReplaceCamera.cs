@@ -11,6 +11,8 @@ public class ReplaceCamera : NetworkBehaviour
     private Transform _savedParent;
     private Vector3 _savedPosition;
     private Quaternion _savedRotation;
+
+    private bool _appIsQuitting;
     
     public void Start()
     {
@@ -22,6 +24,7 @@ public class ReplaceCamera : NetworkBehaviour
         }
         
         _mainCamTransform = Camera.main.transform;
+        Application.quitting += () => _appIsQuitting = true;
         
         // Save
         _savedParent = _mainCamTransform.parent;
@@ -35,7 +38,8 @@ public class ReplaceCamera : NetworkBehaviour
     
     public void OnDestroy()
     {
-        if (!isLocalPlayer) return;
+        if (!isLocalPlayer || _appIsQuitting) return;
+        
         // Return to previous
         _mainCamTransform.SetParent(_savedParent);
         _mainCamTransform.SetPositionAndRotation(_savedPosition, _savedRotation);
