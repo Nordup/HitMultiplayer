@@ -4,16 +4,19 @@ using UnityEngine.UI;
 
 namespace UI
 {
+    [RequireComponent(typeof(Button))]
     public class LeaveRoom : MonoBehaviour
     {
         public HitNetworkManager manager;
-        public Button leaveRoomBnt;
         
-        void Start()
+        private Button _leaveRoomBnt;
+        
+        private void Start()
         {
-            leaveRoomBnt.onClick.AddListener(OnLeaveRoom);
+            _leaveRoomBnt = GetComponent<Button>();
+            _leaveRoomBnt.onClick.AddListener(OnLeaveRoom);
         }
-
+        
         private void OnLeaveRoom()
         {
             if (NetworkServer.active && NetworkClient.isConnected)
@@ -29,10 +32,10 @@ namespace UI
                 manager.StopServer();
             }
         }
-
+        
         private void OnDestroy()
         {
-            leaveRoomBnt.onClick.RemoveListener(OnLeaveRoom);
+            _leaveRoomBnt.onClick.RemoveListener(OnLeaveRoom);
         }
     }
 }

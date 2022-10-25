@@ -19,8 +19,7 @@ namespace UI
         
         private void CheckName(string playerName)
         {
-            // TODO: check name
-            menuEvents.PlayerNameChanged(playerName);
+            if (!string.IsNullOrEmpty(playerName)) menuEvents.PlayerNameChanged(playerName);
         }
         
         private void OnDestroy()
