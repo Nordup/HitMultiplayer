@@ -80,7 +80,8 @@ namespace Player
             _dashDirection = direction;
             _dashStartTime = Time.time;
             
-             await Task.Delay((int)(dashTime * 1000));
+            await Task.Delay((int)(dashTime * 1000));
+            if (!isLocalPlayer) await Task.Delay(200);// Ping compensation
             _dashDirection = Vector3.zero;
         }
     }

@@ -34,7 +34,6 @@ namespace Player
             var otherPMovement = other.gameObject.GetComponent<PMovement>();
             if (!otherPMovement.IsDashing) return;
             
-            // TODO: fix wrong client hit detection
             if (!_pMovement.IsDashing || otherPMovement.DashStartTime < _pMovement.DashStartTime)
                 WasHit(otherPMovement.netIdentity);
         }
