@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 
@@ -24,6 +25,11 @@ namespace UI
         public void HideMenu()
         {
             winnerMenu.SetActive(false);
+        }
+        
+        public void OnDisable()
+        {
+            HideMenu();
         }
     }
 }

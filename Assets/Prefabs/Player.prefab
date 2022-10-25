@@ -557,6 +557,7 @@ MonoBehaviour:
   moveSpeed: 8
   dashTime: 0.3
   dashDistance: 10
+  maxYSpeed: 3
 --- !u!114 &-7110448192449281744
 MonoBehaviour:
   m_ObjectHideFlags: 0

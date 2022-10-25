@@ -10,6 +10,7 @@ namespace Player
         public float moveSpeed;
         public float dashTime;
         public float dashDistance;
+        public float maxYSpeed;
         
         // Components
         private Rigidbody _rigidbody;
@@ -52,6 +53,8 @@ namespace Player
         {
             if (!isLocalPlayer) return;
             
+            var velocityY = _rigidbody.velocity.y;
+            velocityY = velocityY > maxYSpeed ? maxYSpeed : velocityY;
             if (IsDashing)
             {
                 if (Time.time - _dashStartTime > dashTime)
@@ -62,12 +65,12 @@ namespace Player
                 
                 var dashSpeed = dashDistance / dashTime;
                 var dir = dashSpeed * _dashDirection;
-                _rigidbody.velocity = new Vector3(dir.x, _rigidbody.velocity.y, dir.z);
+                _rigidbody.velocity = new Vector3(dir.x, velocityY, dir.z);
             }
             else
             {
                 var dir = moveSpeed * _moveDirection;
-                _rigidbody.velocity = new Vector3(dir.x, _rigidbody.velocity.y, dir.z);
+                _rigidbody.velocity = new Vector3(dir.x, velocityY, dir.z);
             }
         }
 
