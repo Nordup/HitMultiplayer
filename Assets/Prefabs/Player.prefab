@@ -99,7 +99,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3512726852306377295}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &7736468666360255765
 MeshFilter:
@@ -517,8 +517,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 2790543396763042303}
   - {fileID: 1654302507872050789}
+  - {fileID: 2790543396763042303}
   - {fileID: 6349401810022851788}
   - {fileID: 2385456474817714107}
   m_Father: {fileID: 0}
@@ -573,6 +573,8 @@ MonoBehaviour:
   syncInterval: 0.1
   hitTime: 3
   gameEvents: {fileID: 11400000, guid: 53a6000b0c0408f46aa44be8a5bc1330, type: 2}
+  material: {fileID: 3512726852306377293}
+  faceMaterial: {fileID: 1046127768649192298}
 --- !u!114 &-6070637595058071885
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1143,5 +1145,5 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3512726852306377295}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

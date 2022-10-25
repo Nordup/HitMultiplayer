@@ -10,10 +10,11 @@ namespace Player
         // Inspector vars
         public float hitTime;
         public GameEvents gameEvents;
+        public MeshRenderer material;
+        public MeshRenderer faceMaterial;
         
         // Components
         private PMovement _pMovement;
-        private MeshRenderer _meshRenderer;
         
         [SyncVar(hook = nameof(SetHit))]
         private bool _isHit;
@@ -23,7 +24,6 @@ namespace Player
             if (!gameEvents) Debug.LogError("gameEvents is not set");
             
             _pMovement = GetComponent<PMovement>();
-            _meshRenderer = GetComponent<MeshRenderer>();
         }
         
         private void OnCollisionEnter(Collision other)
@@ -54,8 +54,10 @@ namespace Player
         [Client]
         private void SetHit(bool oldValue, bool newValue)
         {
-            if (!_meshRenderer) return;
-            _meshRenderer.material.color = _isHit ? Color.red : Color.gray;
+            if (!material || !faceMaterial) return;
+            var color = _isHit ? Color.red : Color.gray;
+            material.material.color = color;
+            faceMaterial.material.color = color;
         }
     }
 }
