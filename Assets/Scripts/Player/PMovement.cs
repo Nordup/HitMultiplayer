@@ -35,6 +35,8 @@ namespace Player
             // WASD handling
             _moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
             _moveDirection = transform.rotation * _moveDirection;
+            if (_moveDirection.magnitude > 1)
+                _moveDirection = _moveDirection.normalized;
             
             // Dash
             if (Input.GetMouseButtonDown(0) && !IsDashing && _moveDirection != Vector3.zero)
@@ -59,13 +61,13 @@ namespace Player
                 }
                 
                 var dashSpeed = dashDistance / dashTime;
-                var dir = Time.fixedDeltaTime * dashSpeed * _dashDirection;
-                _rigidbody.MovePosition(_rigidbody.position + dir);
+                var dir = dashSpeed * _dashDirection;
+                _rigidbody.velocity = new Vector3(dir.x, _rigidbody.velocity.y, dir.z);
             }
             else
             {
-                var dir = Time.fixedDeltaTime * moveSpeed * _moveDirection;
-                _rigidbody.MovePosition(_rigidbody.position + dir);
+                var dir = moveSpeed * _moveDirection;
+                _rigidbody.velocity = new Vector3(dir.x, _rigidbody.velocity.y, dir.z);
             }
         }
 

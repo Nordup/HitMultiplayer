@@ -554,9 +554,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 1
   syncInterval: 0.01
-  moveSpeed: 10
-  dashTime: 0.2
-  dashDistance: 15
+  moveSpeed: 8
+  dashTime: 0.3
+  dashDistance: 10
 --- !u!114 &-7110448192449281744
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -588,7 +588,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   syncMode: 0
-  syncInterval: 0.5
+  syncInterval: 0.1
   gameEvents: {fileID: 11400000, guid: 53a6000b0c0408f46aa44be8a5bc1330, type: 2}
   scoreText: {fileID: 7390567959853354203}
 --- !u!114 &6229533456760150911
