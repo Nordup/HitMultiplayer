@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Player
 {
-    public class Player : NetworkBehaviour
+    public class PEvents : NetworkBehaviour
     {
         public GameEvents gameEvents;
         public MenuEvents menuEvents;
