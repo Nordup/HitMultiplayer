@@ -12,6 +12,7 @@ Attack opponents with LMB, earn more score and win the match.
 1. Download and extract HitMultiplayer.zip
 2. Run executable HitMultiplayer.exe
 3. Allow access to private networks
+##### Note. Executable and project might not be compatible
 
 
 ## Screenshots
