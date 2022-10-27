@@ -14,7 +14,7 @@ public class ScoreManager : NetworkBehaviour
     [Server]
     private void Start()
     {
-        if (!gameEvents) Debug.LogError("gameEvents is not set");
+        if (!gameEvents) Debug.LogError($"{nameof(gameEvents)} is not set");
         
         gameEvents.PlayerJoinedEvent += RegisterPlayer;
         gameEvents.PlayerLeftEvent += UnregisterPlayer;

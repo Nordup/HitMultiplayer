@@ -7,7 +7,7 @@ namespace Player
 {
     public class PName : NetworkBehaviour
     {
-        public MenuEvents menuEvents;
+        public MenuInputEvents menuInputEvents;
         public TextMeshProUGUI nameText;
         
         [SyncVar(hook = nameof(SetName))]
@@ -16,10 +16,10 @@ namespace Player
         [Client]
         private void Start()
         {
-            if (!menuEvents) Debug.LogError("menuEvents is not set");
+            if (!menuInputEvents) Debug.LogError($"{nameof(menuInputEvents)} is not set");
             if (!isLocalPlayer) return;
             
-            CmdSetName(menuEvents.PlayerName);
+            CmdSetName(menuInputEvents.PlayerName);
         }
         
         [Command] // Sends to server

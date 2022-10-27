@@ -13,11 +13,10 @@ public class GameManager : NetworkBehaviour
     
     // UI calls on clients
     public WinnerMenu winnerMenu;
-    public CursorHide cursorHide;
     
     private void Start()
     {
-        if (!gameEvents) Debug.LogError("gameEvents is not set");
+        if (!gameEvents) Debug.LogError($"{nameof(gameEvents)} is not set");
         if (!isServer) return;
         gameEvents.PlayerWonEvent += OnPlayerWon;
     }
@@ -41,14 +40,12 @@ public class GameManager : NetworkBehaviour
     private void RpcShowWinnerMenu(NetworkIdentity playerId, string playerName, int score)
     {
         winnerMenu.ShowMenu(playerName, score);
-        cursorHide.ShowCursor();
     }
     
     [ClientRpc]
     private void RpcHideWinnerMenu()
     {
         winnerMenu.HideMenu();
-        cursorHide.HideCursor();
     }
     
     private void OnDestroy()

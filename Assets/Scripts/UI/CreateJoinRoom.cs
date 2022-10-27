@@ -1,3 +1,4 @@
+using Events;
 using Mirror;
 using UnityEngine;
 using UnityEngine.UI;
@@ -6,19 +7,13 @@ namespace UI
 {
     public class CreateJoinRoom : MonoBehaviour
     {
-        public HitNetworkManager manager;
-        
-        // Create room
         public Button createBtn;
-        public Slider maxPlayers;
-        
-        // Join room
         public Button joinBtn;
-        public AvailableRooms availableRooms;
+        public MenuInputEvents menuInputEvents;
         
         private void Start()
         {
-            maxPlayers.maxValue = manager.maxConnections;
+            if (!menuInputEvents) Debug.LogError($"{nameof(menuInputEvents)} is not set");
             
             createBtn.onClick.AddListener(CreateRoom);
             joinBtn.onClick.AddListener(JoinRoom);
@@ -32,8 +27,8 @@ namespace UI
                 return;
             }
             
-            manager.maxConnections = (int)maxPlayers.value;
-            manager.StartHost();
+            NetworkManager.singleton.maxConnections = menuInputEvents.MaxPlayers;
+            NetworkManager.singleton.StartHost();
         }
         
         private void JoinRoom()
@@ -44,7 +39,7 @@ namespace UI
                 return;
             }
             
-            manager.StartClient(availableRooms.SelectedRoomUri);
+            NetworkManager.singleton.StartClient(menuInputEvents.SelectedRoomUri);
         }
         
         private void OnDestroy()

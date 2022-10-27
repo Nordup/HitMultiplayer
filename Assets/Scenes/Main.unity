@@ -857,7 +857,6 @@ MonoBehaviour:
   playersManager: {fileID: 470774214}
   scoreManager: {fileID: 577246964}
   winnerMenu: {fileID: 324762331}
-  cursorHide: {fileID: 1807420765}
 --- !u!114 &206387619
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4174,7 +4173,7 @@ RectTransform:
   m_Children:
   - {fileID: 1863247526}
   m_Father: {fileID: 1187763972}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
@@ -4983,9 +4982,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   joinBtn: {fileID: 1280382245}
-  roomsDropdown: {fileID: 363123671}
   refreshBtn: {fileID: 1231597784}
-  networkDiscovery: {fileID: 1974131503}
+  roomsDropdown: {fileID: 363123671}
+  networkEvents: {fileID: 11400000, guid: 2dc0e3d3e09869e43b23f2e4779ff022, type: 2}
+  menuInputEvents: {fileID: 11400000, guid: f3f8e580e3dac3247a2eea894072e673, type: 2}
 --- !u!1 &904282684
 GameObject:
   m_ObjectHideFlags: 0
@@ -5267,7 +5267,7 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1807420762}
+  - {fileID: 2106701813}
   - {fileID: 1187763972}
   - {fileID: 324762329}
   m_Father: {fileID: 0}
@@ -5778,7 +5778,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   createBtn: {fileID: 207225844}
   roomNameIField: {fileID: 270066878}
-  menuEvents: {fileID: 11400000, guid: f3f8e580e3dac3247a2eea894072e673, type: 2}
+  menuInputEvents: {fileID: 11400000, guid: f3f8e580e3dac3247a2eea894072e673, type: 2}
 --- !u!1 &1127343911
 GameObject:
   m_ObjectHideFlags: 0
@@ -5913,7 +5913,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   slider: {fileID: 383856407}
   countText: {fileID: 1221094035}
-  menuEvents: {fileID: 11400000, guid: f3f8e580e3dac3247a2eea894072e673, type: 2}
+  menuInputEvents: {fileID: 11400000, guid: f3f8e580e3dac3247a2eea894072e673, type: 2}
 --- !u!1 &1147623353
 GameObject:
   m_ObjectHideFlags: 0
@@ -6122,6 +6122,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 611745573}
+  - {fileID: 1807420762}
   - {fileID: 1759828483}
   - {fileID: 815862635}
   m_Father: {fileID: 1012968005}
@@ -7301,7 +7302,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerNameIField: {fileID: 255691129}
-  menuEvents: {fileID: 11400000, guid: f3f8e580e3dac3247a2eea894072e673, type: 2}
+  menuInputEvents: {fileID: 11400000, guid: f3f8e580e3dac3247a2eea894072e673, type: 2}
 --- !u!1 &1354390413
 GameObject:
   m_ObjectHideFlags: 0
@@ -8874,7 +8875,7 @@ RectTransform:
   - {fileID: 1896024802}
   - {fileID: 298450816}
   m_Father: {fileID: 1187763972}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -9216,8 +9217,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1807420762}
   - component: {fileID: 1807420764}
-  - component: {fileID: 1807420763}
-  - component: {fileID: 1807420765}
   m_Layer: 0
   m_Name: CreateJoinRoom
   m_TagString: Untagged
@@ -9232,34 +9231,19 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1807420761}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1012968005}
-  m_RootOrder: 0
+  m_Father: {fileID: 1187763972}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1807420763
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1807420761}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f0d51418515e426e94e675ae3e90f5f8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  networkEvents: {fileID: 11400000, guid: 2dc0e3d3e09869e43b23f2e4779ff022, type: 2}
-  menuPanel: {fileID: 1187763971}
-  inGameUI: {fileID: 324762328}
 --- !u!114 &1807420764
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9272,24 +9256,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41d46cf5e99c496e91e83f11d8a87588, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  manager: {fileID: 1974131502}
   createBtn: {fileID: 207225844}
-  maxPlayers: {fileID: 383856407}
   joinBtn: {fileID: 1280382245}
-  availableRooms: {fileID: 903281897}
---- !u!114 &1807420765
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1807420761}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ec5cb20876614a7ba54b110910476661, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  networkEvents: {fileID: 11400000, guid: 2dc0e3d3e09869e43b23f2e4779ff022, type: 2}
+  menuInputEvents: {fileID: 11400000, guid: f3f8e580e3dac3247a2eea894072e673, type: 2}
 --- !u!1 &1807615813
 GameObject:
   m_ObjectHideFlags: 0
@@ -10472,7 +10441,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8409bdf8c8d72a41adf8f3dcc1e1c9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  manager: {fileID: 1974131502}
 --- !u!1 &1974131497
 GameObject:
   m_ObjectHideFlags: 0
@@ -10486,7 +10454,7 @@ GameObject:
   - component: {fileID: 1974131502}
   - component: {fileID: 1974131498}
   m_Layer: 0
-  m_Name: NetworkManager
+  m_Name: NetworkManager/Discovery
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10581,7 +10549,8 @@ MonoBehaviour:
   enableActiveDiscovery: 1
   ActiveDiscoveryInterval: 6
   transport: {fileID: 1974131498}
-  menuEvents: {fileID: 11400000, guid: f3f8e580e3dac3247a2eea894072e673, type: 2}
+  networkEvents: {fileID: 11400000, guid: 2dc0e3d3e09869e43b23f2e4779ff022, type: 2}
+  menuInputEvents: {fileID: 11400000, guid: f3f8e580e3dac3247a2eea894072e673, type: 2}
 --- !u!1 &1990314220
 GameObject:
   m_ObjectHideFlags: 0
@@ -10957,6 +10926,72 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 2105743532}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2106701812
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2106701813}
+  - component: {fileID: 2106701815}
+  - component: {fileID: 2106701814}
+  m_Layer: 0
+  m_Name: HideMenu/Cursor
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &2106701813
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2106701812}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1012968005}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &2106701814
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2106701812}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec5cb20876614a7ba54b110910476661, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  networkEvents: {fileID: 11400000, guid: 2dc0e3d3e09869e43b23f2e4779ff022, type: 2}
+--- !u!114 &2106701815
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2106701812}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0d51418515e426e94e675ae3e90f5f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  networkEvents: {fileID: 11400000, guid: 2dc0e3d3e09869e43b23f2e4779ff022, type: 2}
+  menuPanel: {fileID: 1187763971}
+  inGameUI: {fileID: 324762328}
 --- !u!1001 &2121524106
 PrefabInstance:
   m_ObjectHideFlags: 0

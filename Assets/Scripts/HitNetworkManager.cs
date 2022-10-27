@@ -16,7 +16,7 @@ public class HitNetworkManager : NetworkManager
     {
         base.Start();
         
-        if (!networkEvents) Debug.LogError("networkEvents is not set");
+        if (!networkEvents) Debug.LogError($"{nameof(networkEvents)} is not set");
         _networkDiscovery = GetComponent<HitNetworkDiscovery>();
     }
     

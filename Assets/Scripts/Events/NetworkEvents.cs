@@ -8,6 +8,8 @@ namespace Events
     {
         public event Action ClientConnectEvent;
         public event Action ClientDisconnectEvent;
+        public event Action StartDiscoveryEvent;
+        public event Action<DiscoveryResponse> ServerFoundEvent;
         
         public void ClientConnect()
         {
@@ -17,6 +19,16 @@ namespace Events
         public void ClientDisconnect()
         {
             ClientDisconnectEvent?.Invoke();
+        }
+        
+        public void StartDiscovery()
+        {
+            StartDiscoveryEvent?.Invoke();
+        }
+        
+        public void ServerFound(DiscoveryResponse dResponse)
+        {
+            ServerFoundEvent?.Invoke(dResponse);
         }
     }
 }

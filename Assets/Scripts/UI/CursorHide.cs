@@ -11,24 +11,24 @@ namespace UI
         
         private void Start()
         {
-            if (!networkEvents) Debug.LogError("networkEvents is not set");
+            if (!networkEvents) Debug.LogError($"{nameof(networkEvents)} is not set");
             
             networkEvents.ClientConnectEvent += OnEnterGame;
             networkEvents.ClientDisconnectEvent += OnLeaveGame;
 
             _isInGame = false;
         }
-        
-        private void OnEnterGame()
+
+        private void ShowCursor()
         {
-            _isInGame = true;
-            HideCursor();
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
         }
-        
-        private void OnLeaveGame()
+
+        private void HideCursor()
         {
-            _isInGame = false;
-            ShowCursor();
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
         }
         
         private void Update()
@@ -46,16 +46,16 @@ namespace UI
             }
         }
         
-        public void ShowCursor()
+        private void OnEnterGame()
         {
-            Cursor.visible = true;
-            Cursor.lockState = CursorLockMode.None;
+            _isInGame = true;
+            HideCursor();
         }
         
-        public void HideCursor()
+        private void OnLeaveGame()
         {
-            Cursor.visible = false;
-            Cursor.lockState = CursorLockMode.Locked;
+            _isInGame = false;
+            ShowCursor();
         }
         
         private void OnDestroy()

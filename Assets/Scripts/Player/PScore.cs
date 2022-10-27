@@ -15,7 +15,7 @@ namespace Player
         
         public override void OnStartServer()
         {
-            if (!gameEvents) Debug.LogError("gameEvents is not set");
+            if (!gameEvents) Debug.LogError($"{nameof(gameEvents)} is not set");
             gameEvents.UpdatePlayerScoreEvent += OnUpdateScore;
         }
         

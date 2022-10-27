@@ -7,8 +7,6 @@ namespace UI
     [RequireComponent(typeof(Button))]
     public class LeaveRoom : MonoBehaviour
     {
-        public HitNetworkManager manager;
-        
         private Button _leaveRoomBnt;
         
         private void Start()
@@ -21,15 +19,15 @@ namespace UI
         {
             if (NetworkServer.active && NetworkClient.isConnected)
             {
-                manager.StopHost();
+                NetworkManager.singleton.StopHost();
             }
             else if (NetworkClient.isConnected)
             {
-                manager.StopClient();
+                NetworkManager.singleton.StopClient();
             }
             else if (NetworkServer.active)
             {
-                manager.StopServer();
+                NetworkManager.singleton.StopServer();
             }
         }
         

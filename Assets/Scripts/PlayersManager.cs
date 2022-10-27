@@ -11,7 +11,7 @@ public class PlayersManager : NetworkBehaviour
     
     private void Start()
     {
-        if (!gameEvents) Debug.LogError("gameEvents is not set");
+        if (!gameEvents) Debug.LogError($"{nameof(gameEvents)} is not set");
         
         gameEvents.PlayerJoinedEvent += OnPlayerJoined;
         gameEvents.PlayerLeftEvent += OnPlayerLeft;

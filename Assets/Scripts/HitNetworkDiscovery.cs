@@ -27,51 +27,43 @@ public class DiscoveryResponse : NetworkMessage
 public class HitNetworkDiscovery : NetworkDiscoveryBase<DiscoveryRequest, DiscoveryResponse>
 {
     public Transport transport;
-    public MenuEvents menuEvents;
-    
-    public event Action<DiscoveryResponse> ServerFoundEvent;
+    public NetworkEvents networkEvents;
+    public MenuInputEvents menuInputEvents;
     
     private long _serverId;
-    
-    // Set from RoomEvents
-    private string _playerName;
-    private string _roomName;
-    private int _maxPlayers;
+
+    private void Awake()
+    {
+        networkEvents.StartDiscoveryEvent += StartDiscovery;
+    }
 
     public override void Start()
     {
-        if (!menuEvents) Debug.LogError("roomEvents is not set");
-        
-        _playerName = menuEvents.PlayerName;
-        _roomName = menuEvents.RoomName;
-        _maxPlayers = menuEvents.MaxPlayers;
-        
-        menuEvents.PlayerNameChangedEvent += playerName => { _playerName = playerName; };
-        menuEvents.RoomNameChangedEvent += roomName => { _roomName = roomName; };
-        menuEvents.MaxPlayersChangedEvent += count => { _maxPlayers = count; };
+        if (!networkEvents) Debug.LogError($"{nameof(networkEvents)} is not set");
+        if (!menuInputEvents) Debug.LogError($"{nameof(menuInputEvents)} is not set");
         
         if (transport == null) transport = Transport.activeTransport;
         _serverId = RandomLong();
-        
+
         base.Start();
     }
     
     // Server part
-
+    
     protected override DiscoveryResponse ProcessRequest(DiscoveryRequest request, IPEndPoint endpoint) 
     {
         try
         {
-            if (string.IsNullOrEmpty(_roomName) || _maxPlayers == 0)
+            if (string.IsNullOrEmpty(menuInputEvents.RoomName) || menuInputEvents.MaxPlayers == 0)
                 Debug.LogError("Some DiscoveryResponse vars are not set");
             
             return new DiscoveryResponse
             {
                 Uri = transport.ServerUri(),
                 serverId = _serverId,
-                roomName = _roomName,
+                roomName = menuInputEvents.RoomName,
                 totalPlayers = NetworkServer.connections.Count,
-                maxPlayers = _maxPlayers,
+                maxPlayers = menuInputEvents.MaxPlayers,
                 nameAvailable = IsNameAvailable(request.playerName)
             };
         }
@@ -81,7 +73,7 @@ public class HitNetworkDiscovery : NetworkDiscoveryBase<DiscoveryRequest, Discov
             throw;
         }
     }
-
+    
     private bool IsNameAvailable(string playerName)
     {
         // TODO: implement later
@@ -92,12 +84,12 @@ public class HitNetworkDiscovery : NetworkDiscoveryBase<DiscoveryRequest, Discov
     
     protected override DiscoveryRequest GetRequest()
     {
-        if (string.IsNullOrEmpty(_playerName))
+        if (string.IsNullOrEmpty(menuInputEvents.PlayerName))
             Debug.LogError("Some DiscoveryRequest vars are not set");
         
         return new DiscoveryRequest()
         {
-            playerName = _playerName
+            playerName = menuInputEvents.PlayerName
         };
     }
     
@@ -111,6 +103,6 @@ public class HitNetworkDiscovery : NetworkDiscoveryBase<DiscoveryRequest, Discov
         };
         response.Uri = realUri.Uri;
         
-        ServerFoundEvent?.Invoke(response);
+        networkEvents.ServerFound(response);
     }
 }

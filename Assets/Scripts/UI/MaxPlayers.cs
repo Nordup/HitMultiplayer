@@ -1,4 +1,5 @@
 using Events;
+using Mirror;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,12 +10,14 @@ namespace UI
     {
         public Slider slider;
         public TMP_Text countText;
-        public MenuEvents menuEvents;
+        public MenuInputEvents menuInputEvents;
         
         private void Start()
         {
-            if (!menuEvents) Debug.LogError("roomEvents is not set");
+            if (!menuInputEvents) Debug.LogError($"{nameof(menuInputEvents)} is not set");
+            
             slider.onValueChanged.AddListener(UpdateCount);
+            slider.maxValue = NetworkManager.singleton.maxConnections;
             UpdateCount(slider.value);
         }
         
@@ -22,7 +25,7 @@ namespace UI
         {
             var maxPlayers = (int)count;
             countText.text = maxPlayers.ToString();
-            menuEvents.MaxPlayersChanged(maxPlayers);
+            menuInputEvents.MaxPlayersChanged(maxPlayers);
         }
         
         private void OnDestroy()

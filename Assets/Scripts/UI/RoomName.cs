@@ -9,19 +9,20 @@ namespace UI
     {
         public Button createBtn;
         public TMP_InputField roomNameIField;
-        public MenuEvents menuEvents;
+        public MenuInputEvents menuInputEvents;
         
         private void Start()
         {
-            if (!menuEvents) Debug.LogError("roomEvents is not set");
+            if (!menuInputEvents) Debug.LogError($"{nameof(menuInputEvents)} is not set");
+            
             roomNameIField.onValueChanged.AddListener(CheckName);
-            CheckName(roomNameIField.text);
+            roomNameIField.onEndEdit.AddListener(SetName);
+            
+            SetName(roomNameIField.text);
         }
         
         private void CheckName(string roomName)
         {
-            menuEvents.RoomNameChanged(roomName);
-            
             if (string.IsNullOrEmpty(roomName))
                 createBtn.interactable = false;
             else if (!createBtn.interactable)
@@ -29,10 +30,16 @@ namespace UI
                 createBtn.interactable = true;
             }
         }
+
+        private void SetName(string roomName)
+        {
+            menuInputEvents.RoomNameChanged(roomName);
+        }
         
         private void OnDestroy()
         {
             roomNameIField.onValueChanged.RemoveListener(CheckName);
+            roomNameIField.onEndEdit.RemoveListener(SetName);
         }
     }
 }

@@ -1,6 +1,6 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
+using Events;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -16,17 +16,19 @@ namespace UI
         }
         
         public Button joinBtn;
-        public TMP_Dropdown roomsDropdown;
         public Button refreshBtn;
-        public HitNetworkDiscovery networkDiscovery;
-        
-        [NonSerialized] public Uri SelectedRoomUri;
+        public TMP_Dropdown roomsDropdown;
+        public NetworkEvents networkEvents;
+        public MenuInputEvents menuInputEvents;
         
         private readonly Dictionary<long, RoomInfo> _discoveredServers = new ();
         
         private void Start()
         {
-            networkDiscovery.ServerFoundEvent += OnServerFound;
+            if (!networkEvents) Debug.LogError($"{nameof(networkEvents)} is not set");
+            if (!menuInputEvents) Debug.LogError($"{nameof(menuInputEvents)} is not set");
+            
+            networkEvents.ServerFoundEvent += OnServerFound;
             refreshBtn.onClick.AddListener(SearchForRooms);
             roomsDropdown.onValueChanged.AddListener(OnDropdownValueChanged);
             SearchForRooms();
@@ -38,7 +40,8 @@ namespace UI
 
             var optionData = roomsDropdown.options[dropdownIndex];
             var roomInfo = _discoveredServers.Values.First(rInfo => rInfo.OptionData == optionData);
-            SelectedRoomUri = roomInfo.DResponse.Uri;
+            
+            menuInputEvents.SelectedRoomUriChanged(roomInfo.DResponse.Uri);
         }
 
         private void SearchForRooms()
@@ -48,7 +51,7 @@ namespace UI
             _discoveredServers.Clear();
             roomsDropdown.ClearOptions();
             
-            networkDiscovery.StartDiscovery();
+            networkEvents.StartDiscovery();
         }
 
         private void OnServerFound(DiscoveryResponse dResponse)
@@ -94,7 +97,7 @@ namespace UI
         
         private void OnDestroy()
         {
-            networkDiscovery.ServerFoundEvent -= OnServerFound;
+            networkEvents.ServerFoundEvent -= OnServerFound;
             refreshBtn.onClick.RemoveListener(SearchForRooms);
             roomsDropdown.onValueChanged.RemoveListener(OnDropdownValueChanged);
         }
