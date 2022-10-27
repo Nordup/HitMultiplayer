@@ -4985,7 +4985,7 @@ MonoBehaviour:
   refreshBtn: {fileID: 1231597784}
   roomsDropdown: {fileID: 363123671}
   networkEvents: {fileID: 11400000, guid: 2dc0e3d3e09869e43b23f2e4779ff022, type: 2}
-  menuInputEvents: {fileID: 11400000, guid: f3f8e580e3dac3247a2eea894072e673, type: 2}
+  menuInput: {fileID: 11400000, guid: f3f8e580e3dac3247a2eea894072e673, type: 2}
 --- !u!1 &904282684
 GameObject:
   m_ObjectHideFlags: 0
@@ -5462,7 +5462,6 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   gameEvents: {fileID: 11400000, guid: 53a6000b0c0408f46aa44be8a5bc1330, type: 2}
-  manager: {fileID: 1974131502}
 --- !u!114 &1081514892
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5778,7 +5777,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   createBtn: {fileID: 207225844}
   roomNameIField: {fileID: 270066878}
-  menuInputEvents: {fileID: 11400000, guid: f3f8e580e3dac3247a2eea894072e673, type: 2}
+  menuInput: {fileID: 11400000, guid: f3f8e580e3dac3247a2eea894072e673, type: 2}
 --- !u!1 &1127343911
 GameObject:
   m_ObjectHideFlags: 0
@@ -5913,7 +5912,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   slider: {fileID: 383856407}
   countText: {fileID: 1221094035}
-  menuInputEvents: {fileID: 11400000, guid: f3f8e580e3dac3247a2eea894072e673, type: 2}
+  menuInput: {fileID: 11400000, guid: f3f8e580e3dac3247a2eea894072e673, type: 2}
 --- !u!1 &1147623353
 GameObject:
   m_ObjectHideFlags: 0
@@ -7302,7 +7301,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerNameIField: {fileID: 255691129}
-  menuInputEvents: {fileID: 11400000, guid: f3f8e580e3dac3247a2eea894072e673, type: 2}
+  menuInput: {fileID: 11400000, guid: f3f8e580e3dac3247a2eea894072e673, type: 2}
 --- !u!1 &1354390413
 GameObject:
   m_ObjectHideFlags: 0
@@ -9258,7 +9257,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   createBtn: {fileID: 207225844}
   joinBtn: {fileID: 1280382245}
-  menuInputEvents: {fileID: 11400000, guid: f3f8e580e3dac3247a2eea894072e673, type: 2}
+  menuInput: {fileID: 11400000, guid: f3f8e580e3dac3247a2eea894072e673, type: 2}
 --- !u!1 &1807615813
 GameObject:
   m_ObjectHideFlags: 0
@@ -10549,8 +10548,8 @@ MonoBehaviour:
   enableActiveDiscovery: 1
   ActiveDiscoveryInterval: 6
   transport: {fileID: 1974131498}
+  menuInput: {fileID: 11400000, guid: f3f8e580e3dac3247a2eea894072e673, type: 2}
   networkEvents: {fileID: 11400000, guid: 2dc0e3d3e09869e43b23f2e4779ff022, type: 2}
-  menuInputEvents: {fileID: 11400000, guid: f3f8e580e3dac3247a2eea894072e673, type: 2}
 --- !u!1 &1990314220
 GameObject:
   m_ObjectHideFlags: 0

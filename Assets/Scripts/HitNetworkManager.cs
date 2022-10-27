@@ -6,11 +6,9 @@ using UnityEngine;
 public class HitNetworkManager : NetworkManager
 {
     [Header("HitNetworkManager")]
-    
     public NetworkEvents networkEvents;
     
     private HitNetworkDiscovery _networkDiscovery;
-    private int _totalPlayers;
     
     public override void Start()
     {

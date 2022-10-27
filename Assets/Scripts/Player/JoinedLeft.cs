@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Player
 {
-    public class PJoinedLeft : NetworkBehaviour
+    public class JoinedLeft : NetworkBehaviour
     {
         public GameEvents gameEvents;
         public MenuInput menuInput;

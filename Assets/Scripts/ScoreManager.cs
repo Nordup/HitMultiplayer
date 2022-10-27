@@ -11,7 +11,6 @@ public class ScoreManager : NetworkBehaviour
     
     private readonly Dictionary<NetworkIdentity, int> _playerScores = new ();
     
-    [Server]
     private void Start()
     {
         if (!gameEvents) Debug.LogError($"{nameof(gameEvents)} is not set");

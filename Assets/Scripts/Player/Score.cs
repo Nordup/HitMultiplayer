@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Player
 {
-    public class PScore : NetworkBehaviour
+    public class Score : NetworkBehaviour
     {
         public GameEvents gameEvents;
         public TextMeshProUGUI scoreText;

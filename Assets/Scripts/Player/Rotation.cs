@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Player
 {
-    public class PRotation : NetworkBehaviour
+    public class Rotation : NetworkBehaviour
     {
         // Inspector vars
         public float mouseSensitivity;

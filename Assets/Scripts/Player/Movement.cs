@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Player
 {
     [RequireComponent(typeof(Rigidbody))]
-    public class PMovement : NetworkBehaviour
+    public class Movement : NetworkBehaviour
     {
         // Inspector vars
         public float moveSpeed;

@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Player
 {
-    public class PName : NetworkBehaviour
+    public class Name : NetworkBehaviour
     {
         public MenuInput menuInput;
         public TextMeshProUGUI nameText;

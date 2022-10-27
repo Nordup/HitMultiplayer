@@ -27,8 +27,8 @@ public class DiscoveryResponse : NetworkMessage
 public class HitNetworkDiscovery : NetworkDiscoveryBase<DiscoveryRequest, DiscoveryResponse>
 {
     public Transport transport;
-    public NetworkEvents networkEvents;
     public MenuInput menuInput;
+    public NetworkEvents networkEvents;
     
     private long _serverId;
 
@@ -39,8 +39,8 @@ public class HitNetworkDiscovery : NetworkDiscoveryBase<DiscoveryRequest, Discov
 
     public override void Start()
     {
-        if (!networkEvents) Debug.LogError($"{nameof(networkEvents)} is not set");
         if (!menuInput) Debug.LogError($"{nameof(menuInput)} is not set");
+        if (!networkEvents) Debug.LogError($"{nameof(networkEvents)} is not set");
         
         if (transport == null) transport = Transport.activeTransport;
         _serverId = RandomLong();
