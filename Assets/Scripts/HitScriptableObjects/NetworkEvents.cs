@@ -1,4 +1,5 @@
 using System;
+using HitNetwork;
 using UnityEngine;
 
 namespace HitScriptableObjects
