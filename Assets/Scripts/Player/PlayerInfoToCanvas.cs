@@ -1,20 +1,23 @@
 using UnityEngine;
 
-namespace UI
+namespace Player
 {
-    public class PlayerStatsToCanvas : MonoBehaviour
+    [RequireComponent(typeof(CanvasGroup), typeof(RectTransform))]
+    public class PlayerInfoToCanvas : MonoBehaviour
     {
+        // Inspector vars
         public Transform lookAt;
         public float scaleMult;
         public float minHeight;
         
-        private Camera _mainCamera;
+        // Components
         private CanvasGroup _canvasGroup;
         private RectTransform _transform;
-
+        
+        private Camera _mainCamera;
         private float _minScale;
         
-        void Start()
+        private void Start()
         {
             _mainCamera = Camera.main;
             _canvasGroup = GetComponent<CanvasGroup>();
@@ -22,7 +25,7 @@ namespace UI
             _minScale = minHeight / _transform.sizeDelta.y;
         }
         
-        void Update()
+        private void Update()
         {
             _transform.position = _mainCamera.WorldToScreenPoint(lookAt.position);
             

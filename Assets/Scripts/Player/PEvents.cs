@@ -13,8 +13,8 @@ namespace Player
         {
             if (!gameEvents) Debug.LogError("gameEvents is not set");
             if (!menuEvents) Debug.LogError("menuEvents is not set");
-            
             if (!isLocalPlayer) return;
+            
             CmdInvokePlayerJoined(netIdentity, menuEvents.PlayerName);
         }
         

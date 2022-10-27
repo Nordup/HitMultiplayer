@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace Player
 {
+    [RequireComponent(typeof(Rigidbody))]
     public class PMovement : NetworkBehaviour
     {
         // Inspector vars
@@ -12,11 +13,13 @@ namespace Player
         public float dashDistance;
         public float maxYSpeed;
         
+        // Accessed from other components
+        public bool IsDashing => _dashDirection != Vector3.zero;
+        public float DashStartTime => _dashStartTime;
+        
         // Components
         private Rigidbody _rigidbody;
         
-        public bool IsDashing => _dashDirection != Vector3.zero;
-        public float DashStartTime => _dashStartTime;
         private Vector3 _dashDirection;
         private float _dashStartTime;
         private Vector3 _moveDirection;
@@ -36,8 +39,7 @@ namespace Player
             // WASD handling
             _moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
             _moveDirection = transform.rotation * _moveDirection;
-            if (_moveDirection.magnitude > 1)
-                _moveDirection = _moveDirection.normalized;
+            if (_moveDirection.magnitude > 1) _moveDirection = _moveDirection.normalized;
             
             // Dash
             if (Input.GetMouseButtonDown(0) && !IsDashing && _moveDirection != Vector3.zero)
@@ -53,8 +55,10 @@ namespace Player
         {
             if (!isLocalPlayer) return;
             
+            // Fix flying of the ramp
             var velocityY = _rigidbody.velocity.y;
             velocityY = velocityY > maxYSpeed ? maxYSpeed : velocityY;
+            
             if (IsDashing)
             {
                 if (Time.time - _dashStartTime > dashTime)
@@ -81,7 +85,7 @@ namespace Player
             _dashStartTime = Time.time;
             
             await Task.Delay((int)(dashTime * 1000));
-            if (!isLocalPlayer) await Task.Delay(200);// Ping compensation
+            if (!isLocalPlayer) await Task.Delay(200); // Client position sync compensation
             _dashDirection = Vector3.zero;
         }
     }

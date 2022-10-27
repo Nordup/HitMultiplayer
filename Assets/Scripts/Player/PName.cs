@@ -13,12 +13,13 @@ namespace Player
         [SyncVar(hook = nameof(SetName))]
         private string _playerName;
         
-        [Client] // Local client sets his name on server
+        [Client]
         private void Start()
         {
-            if (!isLocalPlayer) return;
             if (!menuEvents) Debug.LogError("menuEvents is not set");
-            CmdSetName(menuEvents.PlayerName); // Shouldn't be changed during game
+            if (!isLocalPlayer) return;
+            
+            CmdSetName(menuEvents.PlayerName);
         }
         
         [Command] // Sends to server
