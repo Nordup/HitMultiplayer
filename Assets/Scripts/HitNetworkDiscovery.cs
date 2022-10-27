@@ -1,6 +1,6 @@
 using System;
 using System.Net;
-using Events;
+using HitScriptableObjects;
 using Mirror;
 using Mirror.Discovery;
 using UnityEngine;
@@ -28,7 +28,7 @@ public class HitNetworkDiscovery : NetworkDiscoveryBase<DiscoveryRequest, Discov
 {
     public Transport transport;
     public NetworkEvents networkEvents;
-    public MenuInputEvents menuInputEvents;
+    public MenuInput menuInput;
     
     private long _serverId;
 
@@ -40,7 +40,7 @@ public class HitNetworkDiscovery : NetworkDiscoveryBase<DiscoveryRequest, Discov
     public override void Start()
     {
         if (!networkEvents) Debug.LogError($"{nameof(networkEvents)} is not set");
-        if (!menuInputEvents) Debug.LogError($"{nameof(menuInputEvents)} is not set");
+        if (!menuInput) Debug.LogError($"{nameof(menuInput)} is not set");
         
         if (transport == null) transport = Transport.activeTransport;
         _serverId = RandomLong();
@@ -54,16 +54,16 @@ public class HitNetworkDiscovery : NetworkDiscoveryBase<DiscoveryRequest, Discov
     {
         try
         {
-            if (string.IsNullOrEmpty(menuInputEvents.RoomName) || menuInputEvents.MaxPlayers == 0)
+            if (string.IsNullOrEmpty(menuInput.RoomName) || menuInput.MaxPlayers == 0)
                 Debug.LogError("Some DiscoveryResponse vars are not set");
             
             return new DiscoveryResponse
             {
                 Uri = transport.ServerUri(),
                 serverId = _serverId,
-                roomName = menuInputEvents.RoomName,
+                roomName = menuInput.RoomName,
                 totalPlayers = NetworkServer.connections.Count,
-                maxPlayers = menuInputEvents.MaxPlayers,
+                maxPlayers = menuInput.MaxPlayers,
                 nameAvailable = IsNameAvailable(request.playerName)
             };
         }
@@ -84,12 +84,12 @@ public class HitNetworkDiscovery : NetworkDiscoveryBase<DiscoveryRequest, Discov
     
     protected override DiscoveryRequest GetRequest()
     {
-        if (string.IsNullOrEmpty(menuInputEvents.PlayerName))
+        if (string.IsNullOrEmpty(menuInput.PlayerName))
             Debug.LogError("Some DiscoveryRequest vars are not set");
         
         return new DiscoveryRequest()
         {
-            playerName = menuInputEvents.PlayerName
+            playerName = menuInput.PlayerName
         };
     }
     

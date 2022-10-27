@@ -593,7 +593,7 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   gameEvents: {fileID: 11400000, guid: 53a6000b0c0408f46aa44be8a5bc1330, type: 2}
-  menuInputEvents: {fileID: 11400000, guid: f3f8e580e3dac3247a2eea894072e673, type: 2}
+  menuInput: {fileID: 11400000, guid: f3f8e580e3dac3247a2eea894072e673, type: 2}
 --- !u!114 &-6070637595058071885
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -624,7 +624,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  menuInputEvents: {fileID: 11400000, guid: f3f8e580e3dac3247a2eea894072e673, type: 2}
+  menuInput: {fileID: 11400000, guid: f3f8e580e3dac3247a2eea894072e673, type: 2}
   nameText: {fileID: 2120475305722443540}
 --- !u!114 &2480782940440614254
 MonoBehaviour:

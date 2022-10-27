@@ -1,5 +1,5 @@
 using System.Linq;
-using Events;
+using HitScriptableObjects;
 using Mirror;
 using UnityEngine;
 

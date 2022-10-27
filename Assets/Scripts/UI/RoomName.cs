@@ -1,4 +1,4 @@
-using Events;
+using HitScriptableObjects;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,11 +9,11 @@ namespace UI
     {
         public Button createBtn;
         public TMP_InputField roomNameIField;
-        public MenuInputEvents menuInputEvents;
+        public MenuInput menuInput;
         
         private void Start()
         {
-            if (!menuInputEvents) Debug.LogError($"{nameof(menuInputEvents)} is not set");
+            if (!menuInput) Debug.LogError($"{nameof(menuInput)} is not set");
             
             roomNameIField.onValueChanged.AddListener(CheckName);
             roomNameIField.onEndEdit.AddListener(SetName);
@@ -33,7 +33,7 @@ namespace UI
 
         private void SetName(string roomName)
         {
-            menuInputEvents.RoomNameChanged(roomName);
+            menuInput.SetRoomName(roomName);
         }
         
         private void OnDestroy()

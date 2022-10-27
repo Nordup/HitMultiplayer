@@ -1,4 +1,4 @@
-using Events;
+using HitScriptableObjects;
 using TMPro;
 using UnityEngine;
 
@@ -7,11 +7,11 @@ namespace UI
     public class PlayerName : MonoBehaviour
     {
         public TMP_InputField playerNameIField;
-        public MenuInputEvents menuInputEvents;
+        public MenuInput menuInput;
         
         private void Start()
         {
-            if (!menuInputEvents) Debug.LogError($"{nameof(menuInputEvents)} is not set");
+            if (!menuInput) Debug.LogError($"{nameof(menuInput)} is not set");
             
             playerNameIField.onValueChanged.AddListener(CheckName);
             playerNameIField.onEndEdit.AddListener(SetName);
@@ -26,7 +26,7 @@ namespace UI
         
         private void SetName(string playerName)
         {
-            menuInputEvents.PlayerNameChanged(playerName);
+            menuInput.SetPlayerName(playerName);
         }
         
         private void OnDestroy()

@@ -1,4 +1,4 @@
-using Events;
+using HitScriptableObjects;
 using Mirror;
 using UnityEngine;
 
@@ -7,15 +7,15 @@ namespace Player
     public class PJoinedLeft : NetworkBehaviour
     {
         public GameEvents gameEvents;
-        public MenuInputEvents menuInputEvents;
+        public MenuInput menuInput;
         
         private void Start()
         {
             if (!gameEvents) Debug.LogError($"{nameof(gameEvents)} is not set");
-            if (!menuInputEvents) Debug.LogError($"{nameof(menuInputEvents)} is not set");
+            if (!menuInput) Debug.LogError($"{nameof(menuInput)} is not set");
             if (!isLocalPlayer) return;
             
-            CmdInvokePlayerJoined(menuInputEvents.PlayerName);
+            CmdInvokePlayerJoined(menuInput.PlayerName);
         }
         
         [Command]

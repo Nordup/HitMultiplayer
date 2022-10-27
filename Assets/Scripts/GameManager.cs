@@ -1,5 +1,5 @@
 using System.Threading.Tasks;
-using Events;
+using HitScriptableObjects;
 using Mirror;
 using UI;
 using UnityEngine;

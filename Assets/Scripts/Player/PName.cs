@@ -1,4 +1,4 @@
-using Events;
+using HitScriptableObjects;
 using Mirror;
 using TMPro;
 using UnityEngine;
@@ -7,7 +7,7 @@ namespace Player
 {
     public class PName : NetworkBehaviour
     {
-        public MenuInputEvents menuInputEvents;
+        public MenuInput menuInput;
         public TextMeshProUGUI nameText;
         
         [SyncVar(hook = nameof(SetName))]
@@ -16,10 +16,10 @@ namespace Player
         [Client]
         private void Start()
         {
-            if (!menuInputEvents) Debug.LogError($"{nameof(menuInputEvents)} is not set");
+            if (!menuInput) Debug.LogError($"{nameof(menuInput)} is not set");
             if (!isLocalPlayer) return;
             
-            CmdSetName(menuInputEvents.PlayerName);
+            CmdSetName(menuInput.PlayerName);
         }
         
         [Command] // Sends to server

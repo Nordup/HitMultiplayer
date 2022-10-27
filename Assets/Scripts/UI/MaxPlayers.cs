@@ -1,4 +1,4 @@
-using Events;
+using HitScriptableObjects;
 using Mirror;
 using TMPro;
 using UnityEngine;
@@ -10,11 +10,11 @@ namespace UI
     {
         public Slider slider;
         public TMP_Text countText;
-        public MenuInputEvents menuInputEvents;
+        public MenuInput menuInput;
         
         private void Start()
         {
-            if (!menuInputEvents) Debug.LogError($"{nameof(menuInputEvents)} is not set");
+            if (!menuInput) Debug.LogError($"{nameof(menuInput)} is not set");
             
             slider.onValueChanged.AddListener(UpdateCount);
             slider.maxValue = NetworkManager.singleton.maxConnections;
@@ -25,7 +25,7 @@ namespace UI
         {
             var maxPlayers = (int)count;
             countText.text = maxPlayers.ToString();
-            menuInputEvents.MaxPlayersChanged(maxPlayers);
+            menuInput.SetMaxPlayers(maxPlayers);
         }
         
         private void OnDestroy()

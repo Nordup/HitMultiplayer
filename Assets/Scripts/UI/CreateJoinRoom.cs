@@ -1,4 +1,4 @@
-using Events;
+using HitScriptableObjects;
 using Mirror;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,11 +9,11 @@ namespace UI
     {
         public Button createBtn;
         public Button joinBtn;
-        public MenuInputEvents menuInputEvents;
+        public MenuInput menuInput;
         
         private void Start()
         {
-            if (!menuInputEvents) Debug.LogError($"{nameof(menuInputEvents)} is not set");
+            if (!menuInput) Debug.LogError($"{nameof(menuInput)} is not set");
             
             createBtn.onClick.AddListener(CreateRoom);
             joinBtn.onClick.AddListener(JoinRoom);
@@ -27,7 +27,7 @@ namespace UI
                 return;
             }
             
-            NetworkManager.singleton.maxConnections = menuInputEvents.MaxPlayers;
+            NetworkManager.singleton.maxConnections = menuInput.MaxPlayers;
             NetworkManager.singleton.StartHost();
         }
         
@@ -39,7 +39,7 @@ namespace UI
                 return;
             }
             
-            NetworkManager.singleton.StartClient(menuInputEvents.SelectedRoomUri);
+            NetworkManager.singleton.StartClient(menuInput.SelectedRoomUri);
         }
         
         private void OnDestroy()
