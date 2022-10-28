@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using HitNetwork;
 using HitScriptableObjects;
 using TMPro;
 using UnityEngine;
@@ -10,10 +9,10 @@ namespace UI
 {
     public class AvailableRooms : MonoBehaviour
     {
-        private class RoomInfo
+        private class RoomOption
         {
             public TMP_Dropdown.OptionData OptionData;
-            public DiscoveryResponse DResponse;
+            public Room Room;
         }
         
         public Button joinBtn;
@@ -23,14 +22,14 @@ namespace UI
         public NetworkEvents networkEvents;
         public MenuInput menuInput;
         
-        private readonly Dictionary<long, RoomInfo> _discoveredRooms = new ();
+        private readonly Dictionary<long, RoomOption> _discoveredRooms = new ();
         
         private void Start()
         {
             if (!networkEvents) Debug.LogError($"{nameof(networkEvents)} is not set");
             if (!menuInput) Debug.LogError($"{nameof(menuInput)} is not set");
             
-            networkEvents.ServerFoundEvent += OnServerFound;
+            networkEvents.RoomFoundEvent += OnRoomFound;
             roomsDropdown.onValueChanged.AddListener(OnDropdownValueChanged);
             refreshBtn.onClick.AddListener(SearchForRooms);
             
@@ -53,22 +52,22 @@ namespace UI
             
             // Find selected roomInfo
             var optionData = roomsDropdown.options[dropdownIndex];
-            var roomInfo = _discoveredRooms.Values.First(rInfo => rInfo.OptionData == optionData);
+            var roomOption = _discoveredRooms.Values.First(rOption => rOption.OptionData == optionData);
             
-            menuInput.SetSelectedRoomUri(roomInfo.DResponse.Uri);
+            menuInput.SetSelectedRoomUri(roomOption.Room.Uri);
         }
-
-        private void OnServerFound(DiscoveryResponse dResponse)
+        
+        private void OnRoomFound(Room room)
         {
-            if (_discoveredRooms.TryGetValue(dResponse.serverId, out var roomInfo))
+            if (_discoveredRooms.TryGetValue(room.serverId, out var roomOption))
             {
                 // Update text
-                roomInfo.DResponse = dResponse;
-                var newText = $"{dResponse.roomName} {roomInfo.DResponse.totalPlayers}/{dResponse.maxPlayers}";
+                roomOption.Room = room;
+                var newText = $"{room.name} {room.totalPlayers}/{room.maxPlayers}";
                 
-                if (roomInfo.OptionData.text == newText) return;
+                if (roomOption.OptionData.text == newText) return;
                 
-                roomInfo.OptionData.text = newText;
+                roomOption.OptionData.text = newText;
                 if (roomsDropdown.IsExpanded)
                 {
                     roomsDropdown.enabled = false;
@@ -83,19 +82,18 @@ namespace UI
                 // Add new room and option
                 var optionData = new TMP_Dropdown.OptionData()
                 {
-                    text = $"{dResponse.roomName} {dResponse.totalPlayers}/{dResponse.maxPlayers}"
+                    text = $"{room.name} {room.totalPlayers}/{room.maxPlayers}"
                 };
-                _discoveredRooms[dResponse.serverId] = new RoomInfo()
+                _discoveredRooms[room.serverId] = new RoomOption()
                 {
                     OptionData = optionData,
-                    DResponse = dResponse
+                    Room = room
                 };
                 roomsDropdown.options.Add(optionData);
                 roomsDropdown.RefreshShownValue();
                 
                 if (roomsDropdown.options.Count == 1) OnDropdownValueChanged(0);
             }
-            
         }
         
         private void OnEnable()
@@ -105,7 +103,7 @@ namespace UI
         
         private void OnDestroy()
         {
-            networkEvents.ServerFoundEvent -= OnServerFound;
+            networkEvents.RoomFoundEvent -= OnRoomFound;
             roomsDropdown.onValueChanged.RemoveListener(OnDropdownValueChanged);
             refreshBtn.onClick.RemoveListener(SearchForRooms);
         }

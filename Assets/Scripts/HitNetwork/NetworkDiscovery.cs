@@ -10,20 +10,14 @@ namespace HitNetwork
     [Serializable]
     public class DiscoveryRequest : NetworkMessage
     {
-        public string playerName;
+        // Nothing for now
     }
     
     [Serializable]
     public class DiscoveryResponse : NetworkMessage
     {
-        public IPEndPoint EndPoint { get; set; }
-        public long serverId;
-        public Uri Uri;
-        
-        public string roomName;
-        public int totalPlayers;
-        public int maxPlayers;
-        public bool nameAvailable;
+        // public IPEndPoint EndPoint { get; set; }
+        public Room room;
     }
     
     public class NetworkDiscovery : NetworkDiscoveryBase<DiscoveryRequest, DiscoveryResponse>
@@ -61,12 +55,14 @@ namespace HitNetwork
                 
                 return new DiscoveryResponse
                 {
-                    Uri = transport.ServerUri(),
-                    serverId = _serverId,
-                    roomName = menuInput.RoomName,
-                    totalPlayers = NetworkServer.connections.Count,
-                    maxPlayers = menuInput.MaxPlayers,
-                    nameAvailable = IsNameAvailable(request.playerName)
+                    room = new Room()
+                    {
+                        Uri = transport.ServerUri(),
+                        serverId = _serverId,
+                        name = menuInput.RoomName,
+                        totalPlayers = NetworkServer.connections.Count,
+                        maxPlayers = menuInput.MaxPlayers
+                    }
                 };
             }
             catch (NotImplementedException)
@@ -76,36 +72,23 @@ namespace HitNetwork
             }
         }
         
-        private bool IsNameAvailable(string playerName)
-        {
-            // TODO: implement later
-            return true;
-        }
-        
         // Client part
         
         protected override DiscoveryRequest GetRequest()
         {
-            if (string.IsNullOrEmpty(menuInput.PlayerName))
-                Debug.LogError("Some DiscoveryRequest vars are not set");
-            
-            return new DiscoveryRequest()
-            {
-                playerName = menuInput.PlayerName
-            };
+            return new DiscoveryRequest();
         }
         
         protected override void ProcessResponse(DiscoveryResponse response, IPEndPoint endpoint)
         {
-            response.EndPoint = endpoint;
-            
-            var realUri = new UriBuilder(response.Uri)
+            var room = response.room;
+            var realUri = new UriBuilder(room.Uri)
             {
-                Host = response.EndPoint.Address.ToString()
+                Host = endpoint.Address.ToString()
             };
-            response.Uri = realUri.Uri;
+            room.Uri = realUri.Uri;
             
-            networkEvents.ServerFound(response);
+            networkEvents.RoomFound(room);
         }
     }
 }

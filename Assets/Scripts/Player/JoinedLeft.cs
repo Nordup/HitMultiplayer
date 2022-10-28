@@ -6,6 +6,7 @@ namespace Player
 {
     public class JoinedLeft : NetworkBehaviour
     {
+        // TODO: handle from NetworkServer.OnConnectedEvent/OnDisconnectedEvent
         public GameEvents gameEvents;
         public MenuInput menuInput;
         

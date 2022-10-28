@@ -12,7 +12,7 @@ namespace ServerOnly
         private void Start()
         {
             if (!gameEvents) Debug.LogError($"{nameof(gameEvents)} is not set");
-        
+            
             gameEvents.PlayerWonEvent += DestroyPlayerObjects;
             gameEvents.RestartMatchEvent += Respawn;
         }
