@@ -27,10 +27,10 @@ Attack opponents with LMB, earn more score and win the match.
 #
 ### Tweak parameters in Unity Editor
 
-- Player movement speed, dash time and distance => `Player prefab > PMovement component`
-- Player color change time on hit => `Player prefab > PCollision component (hitTime)`
+- Player movement speed, dash time and distance => `Player prefab > Movement component`
+- Player color change time on hit => `Player prefab > Collision component (hitTime)`
 - Win score => `Main scene > ScoreManager object`
-- Match restart time => `Main scene > GameManager object`
+- Match restart time => `Main scene > RestartMatch object`
 
 ### Used free plugins
 
