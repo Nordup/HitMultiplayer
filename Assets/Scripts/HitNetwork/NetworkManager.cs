@@ -13,10 +13,10 @@ namespace HitNetwork
         
         public override void Start()
         {
-            base.Start();
-            
             if (!networkEvents) Debug.LogError($"{nameof(networkEvents)} is not set");
             _networkDiscovery = GetComponent<NetworkDiscovery>();
+            
+            base.Start();
         }
         
         // Server

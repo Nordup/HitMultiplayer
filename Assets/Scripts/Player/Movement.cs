@@ -24,14 +24,12 @@ namespace Player
         private float _dashStartTime;
         private Vector3 _moveDirection;
         
-        [Client]
         private void Start()
         {
             if (!isLocalPlayer) return;
             _rigidbody = GetComponent<Rigidbody>();
         }
         
-        [Client]
         private void Update()
         {
             if (!isLocalPlayer) return;
@@ -50,7 +48,6 @@ namespace Player
             }
         }
         
-        [Client]
         private void FixedUpdate()
         {
             if (!isLocalPlayer) return;
@@ -77,7 +74,7 @@ namespace Player
                 _rigidbody.velocity = new Vector3(dir.x, velocityY, dir.z);
             }
         }
-
+        
         [Command]
         private async void CmdIamDashing(Vector3 direction)
         {

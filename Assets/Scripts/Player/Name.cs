@@ -13,7 +13,6 @@ namespace Player
         [SyncVar(hook = nameof(SetName))]
         private string _playerName;
         
-        [Client]
         private void Start()
         {
             if (!menuInput) Debug.LogError($"{nameof(menuInput)} is not set");
