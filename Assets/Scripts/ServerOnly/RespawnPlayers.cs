@@ -19,6 +19,7 @@ namespace ServerOnly
         
         private void DestroyPlayerObjects(NetworkIdentity playerId)
         {
+            NetworkManager.singleton.autoCreatePlayer = false;
             foreach (var conn in NetworkServer.connections.Values.ToArray())
             {
                 Destroy(conn.identity.gameObject);
@@ -27,11 +28,18 @@ namespace ServerOnly
         
         private void Respawn()
         {
+            NetworkManager.singleton.autoCreatePlayer = true;
             foreach (var conn in NetworkServer.connections.Values.ToArray())
             {
                 var newTransform = NetworkManager.singleton.GetStartPosition();
-                NetworkServer.ReplacePlayerForConnection(conn,
-                    Instantiate(NetworkManager.singleton.playerPrefab, newTransform.position, newTransform.rotation), true);
+                var playerPrefab = NetworkManager.singleton.playerPrefab;
+                var player = Instantiate(playerPrefab, newTransform.position, newTransform.rotation);
+                player.name = $"{playerPrefab.name} [connId={conn.connectionId}]";
+                
+                if (conn.identity == null) 
+                    NetworkServer.AddPlayerForConnection(conn, player);
+                else
+                    NetworkServer.ReplacePlayerForConnection(conn, player, true);
             }
         }
         

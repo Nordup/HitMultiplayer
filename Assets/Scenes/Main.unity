@@ -10597,6 +10597,7 @@ MonoBehaviour:
   autoCreatePlayer: 1
   playerSpawnMethod: 0
   spawnPrefabs: []
+  gameEvents: {fileID: 11400000, guid: 53a6000b0c0408f46aa44be8a5bc1330, type: 2}
   networkEvents: {fileID: 11400000, guid: 2dc0e3d3e09869e43b23f2e4779ff022, type: 2}
 --- !u!114 &1974131503
 MonoBehaviour:
