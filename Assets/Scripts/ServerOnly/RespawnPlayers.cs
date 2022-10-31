@@ -36,7 +36,7 @@ namespace ServerOnly
                 var player = Instantiate(playerPrefab, newTransform.position, newTransform.rotation);
                 player.name = $"{playerPrefab.name} [connId={conn.connectionId}]";
                 
-                if (conn.identity == null) 
+                if (conn.identity == null)
                     NetworkServer.AddPlayerForConnection(conn, player);
                 else
                     NetworkServer.ReplacePlayerForConnection(conn, player, true);
